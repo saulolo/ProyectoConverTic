@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication (exclude = {SecurityAutoConfiguration.class})
 //6. por defecto spring boot viene con protocolos de seguridad hay que habiliatarlos con (execlude.......)
 //para que por el momento lo excluda y asi poder visualizar nuestro hola converTic.
-//
+
 
 
 public class ConverTicApplication {
