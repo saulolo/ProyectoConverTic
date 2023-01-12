@@ -1,5 +1,6 @@
 package ProyectoConverTic.ConverTic;
 
+import ProyectoConverTic.ConverTic.modelo.Usuario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -30,6 +31,22 @@ public class ConverTicApplication {
 		server.port=8081 //pongo esta sentencia para decirle a mi aplicativo que trabaje con este puerto
 		en caso de que el por defecto(8080) este ocupado.
 	 */
+
+
+	@GetMapping("/test") //13. Pruebo mis getters and setters en el localhost creando un objeto en otro (opcional) @GetMapping
+	public String test(){
+		Usuario user1 = new Usuario('C', "Saul Hernando", "Echeverri Duque", "saulolo@gmail.com", "ojo con eso");
+		user1.setNombres("Carlos Villagran como kiko");
+		//System.out.println("Aqui se creo la empresa y se renombró."); //Banderita que nos sirve de verificación.
+		return user1.getNombres();
+	}
+
+	/* 14. Creo las tablas que van a ir en la BD y para ello voy al archivo application.properties y escribo la siguiente
+	línea: spring.jpa.hibernate.ddl-auto=update, (update quiere decir que créelo si no ésta creada o si no, actualice la
+	tabla) y a través de hibernate va a ver una interacción donde dice que se comunique con la BD y créelo.
+	 */
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConverTicApplication.class, args);
