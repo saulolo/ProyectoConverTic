@@ -7,21 +7,20 @@ import jakarta.persistence.*;
 public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_marca")
     private int id;
+    @Column(name = "nombre_marca")
     private String nombreMarca;
 
-    @OneToMany
-    @JoinColumn(name = "productoDetalle _id")
-    private ProductoDetalle productoDetalle;
+
 
 
     public Marca() {
     }
 
 
-    public Marca(String nombreMarca, ProductoDetalle productoDetalle) {
+    public Marca(String nombreMarca) {
         this.nombreMarca = nombreMarca;
-        this.productoDetalle = productoDetalle;
     }
 
 
@@ -39,14 +38,6 @@ public class Marca {
 
     public void setNombreMarca(String nombreMarca) {
         this.nombreMarca = nombreMarca;
-    }
-
-    public ProductoDetalle getProductoDetalle() {
-        return productoDetalle;
-    }
-
-    public void setProductoDetalle(ProductoDetalle productoDetalle) {
-        this.productoDetalle = productoDetalle;
     }
 }
 

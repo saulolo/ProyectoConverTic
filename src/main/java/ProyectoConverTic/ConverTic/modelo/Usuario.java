@@ -45,23 +45,110 @@ public class Usuario {
 
 
 
-    /*Hibernate: funciona como un traductor para que el lenguaje de Java se conecte con el lenguaje de SQL, creando
+    /* 18. Hibernate: funciona como un traductor para que el lenguaje de Java se conecte con el lenguaje de SQL, creando
     una copia en forma de objetos de la BD y la pega en java. Hibernate se encarga de mantener la interacción Java - SQL
     actualizada.*/
 
 
-    /*10. Se generan los constructores, uno vacío para que cuando no le envíe todos los parámetros requeridos, él me
+    /*19. Se generan los constructores, uno vacío para que cuando no le envíe todos los parámetros requeridos, él me
     lo deje crear y otro con todos los atributos menos el id porque es incremental.*/
     public Usuario() {
     }
 
-
-
+    public Usuario(String direccion, Departamento departamento, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, String email, boolean terminoCondiciones, Carrito carrito) {
+        this.direccion = direccion;
+        this.departamento = departamento;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.terminoCondiciones = terminoCondiciones;
+        this.carrito = carrito;
+    }
 
     //11. Se generan los getter and setter.
 
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isTerminoCondiciones() {
+        return terminoCondiciones;
+    }
+
+    public void setTerminoCondiciones(boolean terminoCondiciones) {
+        this.terminoCondiciones = terminoCondiciones;
+    }
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
 }
 
     //14. Crear del mismo modo las otras entidades.

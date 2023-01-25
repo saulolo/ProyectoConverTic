@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController  /*1. Hace un llamado al servidor y me va a traer una respuesta que me va a dejar ver en pantalla.
-la diferencia con el @Controller es que éste trabaja protocolo de comunicación htt, o sea trae por respuestas información
+la diferencia con el @Controller es que éste trabaja protocolo de comunicación http, o sea trae por respuestas información
 em formato xml, html y utiliza comandos diferentes a get y post y cuando trabajamos @RestController se comunica con
 respuestas diferentes, puede traer un json, bloques de información, es como una version más nueva de un controlador normal*/
 //2. Aplicativo de spring boot que se comunica con el servidor.

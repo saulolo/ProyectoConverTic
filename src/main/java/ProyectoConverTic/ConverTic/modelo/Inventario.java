@@ -8,21 +8,20 @@ public class Inventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_inventario")
     private int id;
+    @Column(name = "cantidad")
     private int cantidad;
-    @OneToOne
-    @JoinColumn(name = "productoDetalle_id")
-    private ProductoDetalle productoDetalle;
+
 
 
     public Inventario() {
     }
 
-
-    public Inventario(int cantidad, ProductoDetalle productoDetalle) {
+    public Inventario(int cantidad) {
         this.cantidad = cantidad;
-        this.productoDetalle = productoDetalle;
     }
+
 
 
     public int getId() {
@@ -39,14 +38,6 @@ public class Inventario {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public ProductoDetalle getProductoDetalle() {
-        return productoDetalle;
-    }
-
-    public void setProductoDetalle(ProductoDetalle productoDetalle) {
-        this.productoDetalle = productoDetalle;
     }
 }
 

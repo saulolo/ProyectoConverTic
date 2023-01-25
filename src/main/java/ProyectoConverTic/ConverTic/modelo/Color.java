@@ -7,20 +7,19 @@ import jakarta.persistence.*;
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_color")
     private int id;
+    @Column(name = "nombre_color")
     private String nombreColor;
-    @OneToMany
-    @JoinColumn(name = "productoDetalle_id")
-    private ProductoDetalle productoDetalle;
 
 
     public Color() {
     }
 
-    public Color(String nombreColor, ProductoDetalle productoDetalle) {
+    public Color(String nombreColor) {
         this.nombreColor = nombreColor;
-        this.productoDetalle = productoDetalle;
     }
+
 
 
     public int getId() {
@@ -37,14 +36,6 @@ public class Color {
 
     public void setNombreColor(String nombreColor) {
         this.nombreColor = nombreColor;
-    }
-
-    public ProductoDetalle getProductoDetalle() {
-        return productoDetalle;
-    }
-
-    public void setProductoDetalle(ProductoDetalle productoDetalle) {
-        this.productoDetalle = productoDetalle;
     }
 }
 

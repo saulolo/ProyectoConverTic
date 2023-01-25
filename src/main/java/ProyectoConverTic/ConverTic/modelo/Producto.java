@@ -8,16 +8,18 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_producto")
     private int id;
+    @Column(name = "nombre_producto")
     private String nombreProducto;
     @OneToMany
-    @JoinColumn(name = "productoDetalle_id")
+    @JoinColumn(name = "id_producto_detalle")
     private ProductoDetalle productoDetalle;
+    @Column(name = "precio")
     private double precio;
 
 
     //20. Creo constructores
-
     public Producto() {
     }
 
@@ -27,10 +29,7 @@ public class Producto {
         this.precio = precio;
     }
 
-
     //21. creo los Getter and Setter
-
-
     public int getId() {
         return id;
     }

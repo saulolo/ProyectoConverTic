@@ -8,19 +8,18 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_categoria")
     private int id;
+    @Column(name = "nombre_categoria")
     private String nombreCategoria;
-    @OneToMany
-    @JoinColumn(name = "productoDetalle_id")
-    private ProductoDetalle productoDetalle;
+
 
 
     public Categoria() {
     }
 
-    public Categoria(String nombreCategoria, ProductoDetalle productoDetalle) {
+    public Categoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
-        this.productoDetalle = productoDetalle;
     }
 
     public int getId() {
@@ -37,13 +36,5 @@ public class Categoria {
 
     public void setNombreCategoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
-    }
-
-    public ProductoDetalle getProductoDetalle() {
-        return productoDetalle;
-    }
-
-    public void setProductoDetalle(ProductoDetalle productoDetalle) {
-        this.productoDetalle = productoDetalle;
     }
 }
