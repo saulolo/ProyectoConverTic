@@ -13,11 +13,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository //24. Agrego @Repository para indicar a spring boot que esta clase es un repositorio.
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> { /* 23. extendemos de JpaRepository para la conexión con hibernate.
-y para relacionarlo con la entidad usuario con la que se extiende, tenemos que crear un objeto de dicha entidad seguido
-del tipo de variable que tiene su id, en este caso, el de integer. Esto lo que haces, es que cuando lance la app
-me va a crear una especie de BD virtual que es copia que esta en nuestro servidor de postgresql y la va a traducir para
-que nuestra entidad la entienda y pueda trabajar con ella. */
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> { /* 23. extendemos de JpaRepository (tambien
+se puede extender de CrudRepository) para la conexión con hibernate. Y para relacionarlo con la entidad usuario con la
+que se extiende, tenemos que crear un objeto de dicha entidad seguido del tipo de variable que tiene su id, en este caso,
+el de integer. Esto lo que haces, es que cuando lance la app me va a crear una especie de BD virtual que es copia que
+esta en nuestro servidor de postgresql y la va a traducir para que nuestra entidad la entienda y pueda trabajar con ella. */
 
 }
 

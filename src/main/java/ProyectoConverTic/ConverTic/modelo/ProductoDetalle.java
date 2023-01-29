@@ -1,14 +1,20 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "ProductoDetalle")
 public class ProductoDetalle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_producto_detalle")
+    @Column(name = "id_producto_detalle", nullable = false)
     private int id;
     @OneToMany
     @JoinColumn(name = "id_inventario")
@@ -30,75 +36,4 @@ public class ProductoDetalle {
     private Categoria categoria;
 
 
-
-
-
-    public ProductoDetalle() {
-    }
-
-    public ProductoDetalle(Inventario inventario, Genero genero, Marca marca, Talla talla, Color color, Categoria categoria) {
-        this.inventario = inventario;
-        this.genero = genero;
-        this.marca = marca;
-        this.talla = talla;
-        this.color = color;
-        this.categoria = categoria;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Inventario getInventario() {
-        return inventario;
-    }
-
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
-    }
-
-    public Genero getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Genero genero) {
-        this.genero = genero;
-    }
-
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-
-    public Talla getTalla() {
-        return talla;
-    }
-
-    public void setTalla(Talla talla) {
-        this.talla = talla;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }

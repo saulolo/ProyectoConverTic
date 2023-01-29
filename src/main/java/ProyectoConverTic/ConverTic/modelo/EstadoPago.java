@@ -1,42 +1,22 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "EstadoPago")
 public class EstadoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_estado_pago")
+    @Column(name = "id_estado_pago", nullable = false)
     private int id;
-    @Column(name = "estado")
+    @Column(name = "estado", nullable = false)
     private String estado;
 
-
-
-
-    public EstadoPago() {
-    }
-
-    public EstadoPago(String estado) {
-        this.estado = estado;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }

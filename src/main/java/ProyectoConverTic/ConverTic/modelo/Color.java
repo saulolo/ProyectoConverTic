@@ -1,42 +1,23 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "Color")
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_color")
+    @Column(name = "id_color", nullable = false)
     private int id;
-    @Column(name = "nombre_color")
+    @Column(name = "nombre_color", nullable = false)
     private String nombreColor;
 
-
-    public Color() {
-    }
-
-    public Color(String nombreColor) {
-        this.nombreColor = nombreColor;
-    }
-
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreColor() {
-        return nombreColor;
-    }
-
-    public void setNombreColor(String nombreColor) {
-        this.nombreColor = nombreColor;
-    }
 }
 
 

@@ -1,52 +1,25 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "Departamento")
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_departamento")
+    @Column(name = "id_departamento", nullable = false)
     private int id;
-    @Column(name = "nombre_departamento")
+    @Column(name = "nombre_departamento", nullable = false)
     private String nombreDepartamento;
     @ManyToOne
     @JoinColumn(name = "id_ciudad")
     private Departamento departamento;
 
 
-
-    public Departamento() {
-    }
-
-    public Departamento(String nombreDepartamento, Departamento departamento) {
-        this.nombreDepartamento = nombreDepartamento;
-        this.departamento = departamento;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreDepartamento() {
-        return nombreDepartamento;
-    }
-
-    public void setNombreDepartamento(String nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
 }

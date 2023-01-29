@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/*0. Para agregar una dependencia que no incluí en la inicialización del proyecto, como la dependencia de Lombok, me voy
+a la página de mvnrepository.com y busco la dependencia alli, la copio y la pego en mi archivo pom.xml dentro de las etiquetas
+dependency y le doy click en sincronizar.*/
+
 @RestController  /*1. Hace un llamado al servidor y me va a traer una respuesta que me va a dejar ver en pantalla.
 la diferencia con el @Controller es que éste trabaja protocolo de comunicación http, o sea trae por respuestas información
 em formato xml, html y utiliza comandos diferentes a get y post y cuando trabajamos @RestController se comunica con

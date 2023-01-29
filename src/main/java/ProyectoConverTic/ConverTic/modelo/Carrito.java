@@ -1,20 +1,26 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "Carrito")
 public class Carrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_carrito")
+    @Column(name = "id_carrito", nullable = false)
     private int id;
-    @Column(name = "fecha")
+    @Column(name = "fecha", nullable = false)
     private Date fecha;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
     @OneToOne
     @JoinColumn(name = "id_calificacion")
@@ -29,64 +35,8 @@ public class Carrito {
 
 
 
-    //20. Creo constructores
-    public Carrito() {
-    }
+    //20. Creo constructores (ya se implementaron con @Data)
 
-    public Carrito(Date fecha, String email, Calificacion calificacion, EstadoPago estadopago, ProductoVenta productoVenta) {
-        this.fecha = fecha;
-        this.email = email;
-        this.calificacion = calificacion;
-        this.estadopago = estadopago;
-        this.productoVenta = productoVenta;
-    }
+    //21. creo los Getter and Setter (ya se implementaron con @Data)
 
-    //21. creo los Getter and Setter
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Calificacion getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(Calificacion calificacion) {
-        this.calificacion = calificacion;
-    }
-
-    public EstadoPago getEstadopago() {
-        return estadopago;
-    }
-
-    public void setEstadopago(EstadoPago estadopago) {
-        this.estadopago = estadopago;
-    }
-
-    public ProductoVenta getProductoVenta() {
-        return productoVenta;
-    }
-
-    public void setProductoVenta(ProductoVenta productoVenta) {
-        this.productoVenta = productoVenta;
-    }
 }

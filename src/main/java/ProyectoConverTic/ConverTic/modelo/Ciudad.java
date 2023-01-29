@@ -2,41 +2,23 @@ package ProyectoConverTic.ConverTic.modelo;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "Ciudad")
 public class Ciudad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_ciudad")
+    @Column(name = "id_ciudad", nullable = false)
     private int id;
-    @Column(name = "nombre_ciudad")
+    @Column(name = "nombre_ciudad", nullable = false)
     private String nombreCiudad;
 
 
-
-    public Ciudad() {
-    }
-
-    public Ciudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreCiudad() {
-        return nombreCiudad;
-    }
-
-    public void setNombreCiudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
-    }
 }
 

@@ -1,43 +1,23 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "TipoDocumento")
 public class TipoDocumento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @Column(name = "id_tipo_documento")
+    @Column(name = "id_tipo_documento", nullable = false)
     private int id;
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-
-
-
-    public TipoDocumento() {
-    }
-
-    public TipoDocumento(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

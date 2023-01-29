@@ -1,8 +1,15 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@AllArgsConstructor //19.1 Anotación para generar un constructor con todos los atributos.
+@NoArgsConstructor  //19.2 Anotación para generar un constructor vacío.
+//@Getter //11.1 Anotación para generar los getters.
+//@Setter //11.2 Anotación para generar los setters.
+@Data //11.3 Anotación para generar los getters and setters simultáneamente,los métodos Equals y HashCode y el toString.
+//ToString  //11.4 Anotación para generar los todos los toString.
 @Table(name="Usuario") //9. Esta anotación me permite relacionar mi entidad usuario con la tabla usuario, y como name. le puedo poner lo que desee.
 public class Usuario {
 
@@ -15,9 +22,9 @@ public class Usuario {
     @Id //7. Debo crear el Id correspondiente a la tabla de la BD y se lo debo indicar con la anotación @Id
     // para que empalme con la BD.
     @GeneratedValue(strategy = GenerationType.AUTO) //8. Anotación que me indica que mi ID va hacer incremental.
-    @Column(name = "id_usuario")
+    @Column(name = "id_usuario", nullable = false) //8.2 nullable = false, me indica que no puede ir este campo vació.
     private int id;
-    @Column(name = "direccion") //8.1 Con @Colum(name = " ")Renombro el atributo de esta entidad de como lo voy a llamar en la BD
+    @Column(name = "direccion", nullable = false) //8.1 Con @Colum(name = " ")Renombro el atributo de esta entidad de como lo voy a llamar en la BD
     private String direccion;
     @ManyToOne
     @JoinColumn(name = "id_departamento") //8.2 con @JoinColumn nos permite indicar el nombre de la columna a la que queremos hacer referencia en la tabla Departamento
@@ -25,15 +32,15 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "id_tipo_documento")
     private TipoDocumento tipoDocumento;
-    @Column(name = "numero_documento")
+    @Column(name = "numero_documento", nullable = false)
     private String numeroDocumento;
-    @Column(name = "nombres")
+    @Column(name = "nombres", nullable = false)
     private String nombres;
-    @Column(name = "apellidos")
+    @Column(name = "apellidos", nullable = false)
     private String apellidos;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "termino_condiciones")
+    @Column(name = "termino_condiciones", nullable = false)
     private boolean terminoCondiciones;
     @OneToMany //16. Anotacióm de asociación(relación) en este caso es uno a muchos.
     @JoinColumn(name = "id_carrito") /*17. Indico la clave, o sea por donde se van a unir esas columnas de las tablas.
@@ -51,104 +58,13 @@ public class Usuario {
 
 
     /*19. Se generan los constructores, uno vacío para que cuando no le envíe todos los parámetros requeridos, él me
-    lo deje crear y otro con todos los atributos menos el id porque es incremental.*/
-    public Usuario() {
-    }
-
-    public Usuario(String direccion, Departamento departamento, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, String email, boolean terminoCondiciones, Carrito carrito) {
-        this.direccion = direccion;
-        this.departamento = departamento;
-        this.tipoDocumento = tipoDocumento;
-        this.numeroDocumento = numeroDocumento;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.terminoCondiciones = terminoCondiciones;
-        this.carrito = carrito;
-    }
-
-    //11. Se generan los getter and setter.
+    lo deje crear y otro con todos los atributos menos el id porque es incremental. [Lombok esto se autogenera con la
+    etiqueta @AllArgsConstructor (constructor con parámetros) y @NoArgsConstructor (para el constructor vacío)]*/
 
 
-    public int getId() {
-        return id;
-    }
+    /*11. Se generan los getters and setters (Lombok esto se autogenera con la etiqueta @Getter (para los getters)
+    y @Setters (para los setters), y para los dos simultáneamente esta*/
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-
-    public TipoDocumento getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public String getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(String numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isTerminoCondiciones() {
-        return terminoCondiciones;
-    }
-
-    public void setTerminoCondiciones(boolean terminoCondiciones) {
-        this.terminoCondiciones = terminoCondiciones;
-    }
-
-    public Carrito getCarrito() {
-        return carrito;
-    }
-
-    public void setCarrito(Carrito carrito) {
-        this.carrito = carrito;
-    }
 }
 
     //14. Crear del mismo modo las otras entidades.

@@ -1,44 +1,23 @@
 package ProyectoConverTic.ConverTic.modelo;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "Marca")
 public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_marca")
+    @Column(name = "id_marca", nullable = false)
     private int id;
-    @Column(name = "nombre_marca")
+    @Column(name = "nombre_marca", nullable = false)
     private String nombreMarca;
 
-
-
-
-    public Marca() {
-    }
-
-
-    public Marca(String nombreMarca) {
-        this.nombreMarca = nombreMarca;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreMarca() {
-        return nombreMarca;
-    }
-
-    public void setNombreMarca(String nombreMarca) {
-        this.nombreMarca = nombreMarca;
-    }
 }
 
 
