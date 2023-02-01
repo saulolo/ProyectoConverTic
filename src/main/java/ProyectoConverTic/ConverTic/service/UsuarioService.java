@@ -43,13 +43,24 @@ public class UsuarioService {
 
 
     //MÉTODO PARA GUARDAR O ACTUALIZAR OBJETOS DE TIPO USUARIO (guardar y actualizar viene siendo el mismo método)
-    public boolean saveOrUpdateUsuario(Usuario usuario){  //35. Método booleano porque me va a traer un false o un true
+    public boolean saveOrUpdateUsuario(Usuario usuario){  //35. Método booleano porque me va a traer un false o un true (Trayendo el objeto Usuario)
         Usuario user = usuarioRepository.save(usuario);  //36. Creo un objeto temporal para verificar si la tarea se hizo o no.
         if(usuarioRepository.findById(user.getId())!=null){  //37. Utilizo el método save que es el que me va a guardar o actualizar la entidad.
             return true;   //38. Verifico con un condicional para saber si el objeto existe o no , y si sí, que lo actualice.
         }
         return false;
     }
+
+    //MÉTODO PARA ELIMINAR USUARIOS (Elimina usuarios registradas teniendo el id)
+    public boolean deleteUsuarios(Integer id){  //39. Método booleano porque me va a traer un false o un true (Trayendo el objeto Id).
+        usuarioRepository.deleteById(id);  //40. Utilizo el método deleteById porque va a eliminar por ID, y es el que me va a eliminar entidad.
+        if(getUsuarioById(id)!=null){  //41. Verifico con un condicional para saber si el objeto se eliminó o no llamando el método que ya habíamos creado.
+            return false;
+        }
+        return true;
+    }
+
+    //42. Creamos el package controller.
 
 
 
