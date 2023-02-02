@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class ProductoDetalle {
     private int id;
     @OneToMany
     @JoinColumn(name = "id_inventario")
-    private Inventario inventario;
+    private List<Inventario> listaProductos;
     @ManyToOne
     @JoinColumn(name = "id_genero")
     private Genero genero;

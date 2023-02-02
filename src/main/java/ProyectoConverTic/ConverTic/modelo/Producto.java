@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,9 +20,9 @@ public class Producto {
     private int id;
     @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
-    @OneToMany
-    @JoinColumn(name = "id_producto_detalle")
-    private ProductoDetalle productoDetalle;
+    @OneToMany(fetch = FetchType.LAZY) //Carga lenta
+    @JoinColumn(name = "id_producto_detalle") //me revienta porque necesito guardar en una lista por el tipo de relación
+    private List<ProductoDetalle> listaProductos;
     @Column(name = "precio", nullable = false)
     private double precio;
 
