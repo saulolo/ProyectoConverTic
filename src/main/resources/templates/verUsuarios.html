@@ -11,13 +11,29 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        a{
+        color:white;
+        }
+        a:hover{
+        color:black;
+        text-decoration:none;
+        }
+
+
+
+
+
+
+    </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Lista de Usuarios</h1>
     <!--DIBUJAMOS LA TABLA-->
-    <table class="table">
+    <br>
+    <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
             <th>Número Documento</th>
@@ -48,10 +64,10 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
             <td th:text="${usuario.terminoCondiciones}"></td>
             <td>
                 <!--Creo los botones con bootstrap-->
-                <button type="button" class="btn btn-warning"><a th:href="@{/editarUsuario}">Editar</a></button>
+                <button type="button" class="btn btn-warning"><a th:href="@{/EditarUsuario}">Editar</a></button>
             </td>
             <td>
-                <button type="button" class="btn btn-danger"><a th:href="@{/eliminarUsuario}">Eliminar</a>
+                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarUsuario}">Eliminar</a>
                 </button>
                 <!--59. Como pudimos ver esto en pantalla?: Desde el html, busque el elemento que se llama usualist-->
                 <!--ese usualist, lo saque desde el controlador (ControllerFull), ese usualist era el atributo de un modelo-->
@@ -62,6 +78,10 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
             </td>
         </tr>
     </table>
+    <!--60. Vamos a crear un botón que sirva para crear nuevos usuarios-->
+    <button type="button" class="btn btn-info"><a th:href="@{/AgregarUsuario}">Agregar Nuevo Usuario</a></button>
+    <!--61. Me dirijo a crear los otros servicios en este caso el de Agregar Usuario en la clase ControllerFull para enlazarlo con este botón que acabo de crear-->
+
 </div>
 
 </body>

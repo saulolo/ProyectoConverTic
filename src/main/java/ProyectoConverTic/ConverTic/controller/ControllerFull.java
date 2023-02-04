@@ -24,6 +24,7 @@ public class ControllerFull {
     @Autowired  //47. Traigo esta anotación para poder decirle a Spring que vamos a utilizar los métodos de la clase que instanciamos.
     UsuarioService usuarioService; //46. Instancio el objeto UsuarioService para poderme traer todos sus métodos.
 
+    //SERVICIO VER USUARIO
     @GetMapping({"/", "VerUsuarios"}) //49. Creo dos landing para visualizarlo en el html.
     public String viewUsuario(Model model) {  //50. Creamos un método viewEmpresas(nombre opcional) que regrese cadenas.
         List<Usuario> listaUsuario = usuarioService.getAllUsuarios(); //51. Hay una clase inmersa en nuestros procesos la cual no vamos a crear pero podemos
@@ -41,6 +42,16 @@ public class ControllerFull {
 
     /*56. Voy al package templates, click derecho new / html file y le pongo el mismo nombre de mi return en el microservicio
     a ese archivo, en este caso el de VerUsuarios.*/
+
+
+    //SERVICIO AGREGAR USUARIO
+    @GetMapping({"/AgregarUsuario"})
+    public String nuevoUsuario(Model model) {  //63. String porque me devuelve el nombre del template e inserto un artefacto modelable
+        Usuario user = new Usuario();  //64. Creamos un objeto de tipo Usuario gracias al constructor vacío para poderlo llamar en el front
+        model.addAttribute("user", user);  //65. Nombre atributo "user" y en este atributo meto el usuario que acabo de crear user
+        return "agregarUsuario";  //66. Me va a direccionar a la página agregarUsuario
+    }
+    //67. Procedo a crear el template agregarUsuario
 
 }
 
