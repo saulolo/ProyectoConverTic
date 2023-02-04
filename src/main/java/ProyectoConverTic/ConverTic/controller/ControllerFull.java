@@ -24,8 +24,8 @@ public class ControllerFull {
     @Autowired  //47. Traigo esta anotación para poder decirle a Spring que vamos a utilizar los métodos de la clase que instanciamos.
     UsuarioService usuarioService; //46. Instancio el objeto UsuarioService para poderme traer todos sus métodos.
 
-    @GetMapping({"/Usuarios", "VerUsuarios"}) //49. Creo dos landing para visualizarlo en el html.
-    public String viewEmpresas(Model model) {  //50. Creamos un método viewEmpresas(nombre opcional) que regrese cadenas.
+    @GetMapping({"/", "VerUsuarios"}) //49. Creo dos landing para visualizarlo en el html.
+    public String viewUsuario(Model model) {  //50. Creamos un método viewEmpresas(nombre opcional) que regrese cadenas.
         List<Usuario> listaUsuario = usuarioService.getAllUsuarios(); //51. Hay una clase inmersa en nuestros procesos la cual no vamos a crear pero podemos
         model.addAttribute("usualist", listaUsuario); //usar y es la clase model, el cual se va a alimentar de una lista, en este caso la de Usuario.
         return "VerUsuarios";                                //Esa lista la saco de usuarioService y miro los métodos que me trae, en este caso getAllUsuarios().
@@ -33,12 +33,13 @@ public class ControllerFull {
     //53. Utilizo mi clase model para agregar atributos(modelar) a mis listaUsuarios.
     //54. me retorna un String que es VerUsuarios, el cual es super importante porque va hacer el nombre de la pagina html donde voy a poder ver los usuarios.
     //y tal cual debe de ir copiado en el package template de html.
+    //Nota: para que esto se ejecute debo tener la dependencia de Thymeleaf instalada.
 
     /*55. Cuando ejecute el código en este punto, me va a salir un error porque él esta esperando una salida por html y como
     aun no he generado el template, me sale un error esperado. Para ello vamos al package resources / templates, (en caso de
     que no exista la carpeta templates, la creamos haciendo click derecho en el package resources / new / Directory)*/
 
-    /*56. Voy al package templates, click derecho new / html file y le pongo el mismo nombre de mi retur en el microsercicio
+    /*56. Voy al package templates, click derecho new / html file y le pongo el mismo nombre de mi return en el microservicio
     a ese archivo, en este caso el de VerUsuarios.*/
 
 }

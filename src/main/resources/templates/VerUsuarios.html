@@ -1,11 +1,68 @@
+<!--57. Creó la clase verUsuario.html pero esta vez voy a trabajar con un template de bootstrap, dirección:
+https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--Recurso que me llama ls librería Thymeleaf para usar su motor-->
 <head>
-    <meta charset="UTF-8">
-    <title>Ver Usuarios</title>
+    <title>Lista de Usuarios</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Aquí listado de Usuarios</h1> <br>
-<h3>Con sus respectivas funciones</h3>
+
+<div class="container">
+    <h1>Lista de Usuarios</h1>
+    <!--DIBUJAMOS LA TABLA-->
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Número Documento</th>
+            <th>Tipo Documento</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Departamento</th>
+            <th>Termino de Condiciones</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+
+        <!--LLENAMOS LA TABLA DIBUJADA-->
+        <!--58. En nuestro controller, creamos en viewUsuario un modelo con un atributo llamado usualist donde esta guardaba la lista de todos los usuarios-->
+        <tr th:each="usuario : ${usualist}">  <!--usuario: aqui puede ser el nombre que yo quiera-->
+            <!--Creo las filas con los nombres de los atributos de mi clase Usuario-->
+            <!--$ quiere decir que va a buscar de otros recursos que no son propios de html en este caso de thymeleaf-->
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.numeroDocumento}"></td>
+            <td th:text="${usuario.tipoDocumento}"></td>
+            <td th:text="${usuario.nombres}"></td>
+            <td th:text="${usuario.apellidos}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.direccion}"></td>
+            <td th:text="${usuario.departamento}"></td>
+            <td th:text="${usuario.terminoCondiciones}"></td>
+            <td>
+                <!--Creo los botones con bootstrap-->
+                <button type="button" class="btn btn-warning"><a th:href="@{/editarUsuario}">Editar</a></button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger"><a th:href="@{/eliminarUsuario}">Eliminar</a>
+                </button>
+                <!--59. Como pudimos ver esto en pantalla?: Desde el html, busque el elemento que se llama usualist-->
+                <!--ese usualist, lo saque desde el controlador (ControllerFull), ese usualist era el atributo de un modelo-->
+                <!--que estaba alimentado por listaUsuario, listaUsuario es una lista que yo creé y la alimente de lo que conseguía-->
+                <!--un servicio o un método que estaba en mi UsuarioService creado que se llama getAllUsuarios, este a su vez-->
+                <!--esta unido al repositorio UsuarioRepository con el cual podía usar recursos de JPA y buscar lo que esta en la BD-->
+                <!--ya que JPA se ocupa de eso con el hibernate (el sabe cual es la entidad, donde está, etc-->
+            </td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>
