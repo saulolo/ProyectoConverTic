@@ -1,10 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Agregar nuevo usuario</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        a{
+        color:white;
+        }
+        a:hover{
+        color:black;
+        text-decoration:none;
+        }
+
+
+
+
+
+
+
+
+
+    </style>
 </head>
 <body>
+
+<div class="container">
+    <h1>Agregue aquí los datos del usuario</h1>
+    <br>
+    <!--CREAR FORMULARIO PARA LLENAR LOS DATOS DE LA EMPRESA Y GUARDARLA EN EL OBJETO user-->
+    <!--68. creamos el formulario que me posibilita guardar el usuario, para después crear el servicio del mismo nombre que los enlace -->
+    <!--69. Debemos de tener en cuenta en este punto que tenemos que traer el objeto user que creamos en controllerFull para alimentar con la información que recopilemos  -->
+    <!--el th: lo usamos para indicar que lo que estamos llamando viene de otro lado, ya que no se encuentra en esta misma página-->
+    <!--70. Luego llamamos el método que vamos a usar para que guarde la información suministrada, ese es el método post (es el equivalente al set en spring-->
+    <form th:action="@{/GuardarUsuario}" th:object="${user}" method="post">
+        <!--71. Para dar mejor diseño en la pagina web donde me muestra en pantalla, voy a tratar de asumir que la página ésta dividida en 12 columnas-->
+        <!--Diciendo que el nombre ocupe 3 columnas y el resto ocupe las columnas restantes asi: (1), (2) y (3)-->
+        <!--CAMPO PARA NOMBRES-->
+        <div class="row">
+            <div class="form-group col-md-12"> <!--(1) "form-group col-md-12"-->
+                <label class="col-md-3" for="nombre">Nombre(s) del usuario:</label>
+                <!--(2) el label nombre usuario tendrá 3 columnas"form-group col-md-3"-->
+                <div class="col-md-6"> <!--(3) el input nombre tendrá 6 columnas class="col-md-6"-->
+                    <!--72. Para decirle a mi entorno que lo que capture en el input nombre debe enviárselo a empresa en el espacio nombre se lo digo asi:-->
+                    <!--en el campo (field) va el atributo nombres con la siguiente sintaxis ("*{nombres}") que identifique en mi clase Usuario en cual captura la información que se diríje a mi objeto user, que es el encargado de recopilar toda la información -->
+                    <input type="text" th:field="*{nombres}" class="form-control" id="nombre" required="required">
+                    <!--con required indico que ese campo es de obligatoriedad suministrar información-->
+                </div>
+            </div>
+        </div>
+
+        <!--73. Replico el código escrito en el campo nombres pero cambio lo correspondiente a los atributos en cuestión-->
+        <!--CAMPO PARA APELLIDOS-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="apellido">Apellido(s) del usuario:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{apellidos}" class="form-control" id="apellido" required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA TIPO DOCUMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="tipoDocumento">Tipo de Documento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{tipoDocumento}" class="form-control" id="tipoDocumento">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA NÚMERO DOCUMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="numeroDocumento">Número de Documento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{numeroDocumento}" class="form-control" id="numeroDocumento"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA DIRECCIÓN-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="direccion">Direción:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{direccion}" class="form-control" id="direccion"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA DEPARTAMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="departamento">Departamento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{departamento}" class="form-control" id="departamento">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA EMAIL-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="email">Email:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{email}" class="form-control" id="email"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA TERMINO DE CONDICIONES-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="terminoCondiciones">Término de Condiciones:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{terminoCondiciones}" class="form-control" id="terminoCondiciones"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--74. Procedemos a crear los botones (estos van fuera del último div pero dentro de form-->
+        <!--75. Botón para enviar toda la información suministrada y ejecutar la acción--->
+        <div class="row"> <!--class="row" porque va a tener su propia fila-->
+            <div class="col-md-2">
+                <button class="btn btn-success">Crear Usuario</button>
+                <!--No necesito poner el link: <a th:href="@{/GuardarUsuario}">Crear Usuario</a>, porque al crear ese botón dentro del form, el form sabe que es su botón de acción-->
+            </div>
+        </div>
+    </form>
+    <br>
+    <!--76. Procedemos a crear los botones que me dan atrás (estos van fuera del form para no confundir al formulario ya que no sabria cual es el botón que ejecuta la tarea)-->
+    <!--77. Botón para redireccionar a la página anterior--->
+    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+    <!--Otra forma de crear botones: llamo a un servicio tipo javascript: history.go(-1) {es una página anterior}--->
+    <!--class="btn btn-info"(porque me lo traigo de bootstrap) role="button" (porque el servicio del link es de tipo button)--->
+
+</div>
 
 </body>
 </html>

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -53,5 +55,15 @@ public class ControllerFull {
     }
     //67. Procedo a crear el template agregarUsuario
 
+    //78. Procedo a crear el servicio para guardar el usuario
+    //SERVICIO GUARDAR USUARIO
+    @PostMapping("/GuardarUsuario")
+    //79. El servicio a utilizar es @PostMapping porque necesitamos enviar la información(setear)
+    public String guardarUsuarios(Usuario user, RedirectAttributes redirectAttributes) { //80. RedirectAttributes es un atributo que me indica que ese método me va a redireccionar a algún lugar
+        if (usuarioService.saveOrUpdateUsuario(user) == true) { //81. tenemos dos opciones crear un objeto de respuesta o verificar la respuesta desde el principio (nos vamos por esta última).
+            return "redirect:/VerUsuarios";   //82. Verificamos esta ejecución desde el principio con condicionales, en el caso de ser verdadero (o sea que la creó) que me redireccione a la página VerUsuarios
+        }     //NOTA: El redireccionamiento es hacia servicios no hacia el html (paginas web)
+        return "redirect:/agregarUsuario";  //83. En el caso de ser falso (o sea que no guardo) que me redireccione a la página agregarUsuario
+    }
 }
 
