@@ -70,14 +70,23 @@ public class ControllerFull {
     //SERVICIO EDITAR USUARIO
     /*84. Procedo a agregar las funciones del botón editar, para ello creo dos servicios, uno que me muestre la información
     que se registro y otro que una vez la edita, me actualice o guarde.*/
-    @GetMapping({"/EditarUsuario"})
+    @GetMapping("/EditarUsuario/{id}") //Poniendo el id como ruta tambien.
     public String editarUsuario(Model model, @PathVariable Integer id) { //85. Necesito los atributos de modelo y de Id que es como parte de la ruta de la página y para decirle que no es solo un Id sino que es una ruta, utilizo la anotación @PathVariable
         Usuario user = usuarioService.getUsuarioById(id);   //86. Después de crear la variable user la busco por el servicio que creamos para buscar usuario por id  (getUsuarioById) y guardarla en la variable user que cree
         model.addAttribute("user", user);       //87. Luego agregamos esa empresa a nuestro modelo para mandarlo a nuestro html, para alli llenar los campos.
         return "editarUsuario";     //88. Esto me regresa (return) una página de html que vamos a crear y que se llama editarUsuario.
     }
-
     //89. Procedo a crear en el package tenplates, el html de editarUsuario
+
+    //SERVICIO ACTUALIZAR USUARIO
+    //92. Procedo a agregar las funciones del botón Actualizar usuario
+    @PostMapping("/ActualizarUsuario") //el nombre tiene que coincidir con la ruta que le asigne en editar usuario (90)
+    public String updateUsuario(Usuario user) {
+        if (usuarioService.saveOrUpdateUsuario(user) == true) { //Basica/ es el mismo método que en el servicio guardar usuario (78)
+            return "redirect:/VerUsuarios";  //Nota: No hay necesidad de poner == true, por defecto asume que es true
+        }
+        return "redirect:/editarUsuario";
+    }
 
 
 }

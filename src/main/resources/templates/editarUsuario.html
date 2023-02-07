@@ -16,8 +16,6 @@
         text-decoration:none;
         }
 
-
-
     </style>
 </head>
 <body>
@@ -25,16 +23,18 @@
 <div class="container">
     <h1>Edite aquí los datos del usuario</h1>
     <br>
-    <form th:action="@{/ActualizarUsuario}" th:object="${user}" method="post"> <!--90. Nombre la acción del botón ActualizarUsuario-->
+    <form th:action="@{/ActualizarUsuario}" th:object="${user}" method="post">
+        <!--90. Nombre la acción del botón ActualizarUsuario-->
 
 
         <!--CAMPO PARA ID-->
         <!--Este proceso es porque me trae información de id, para que me posibilite ver lo que trae en pantalla-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="id">ID(s) del usuario:</label>
+                <label class="col-md-3" for="id">ID del usuario:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{id}" class="form-control" id="id" required="required">
+                    <input type="text" th:field="*{id}" class="form-control" id="id" required="required" readonly>
+                    <!--readonly: para indicar que este campo no se puede editar-->
                     <!--hidden: tipo oculto(que no lo podemos editar)-->
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="nombre">Nombre(s) del usuario:</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required">
+                    <input type="text" th:field="*{nombres}" class="form-control" id="nombre" required="required">
                 </div>
             </div>
         </div>
@@ -124,15 +124,18 @@
             </div>
         </div>
 
+        <!--BOTÓN ACTUALIZAR-->
+        <!--91. Botón para enviar toda la información suministrada y ejecutar la acción -->
+        <div class="row">
             <div class="col-md-2">
                 <button class="btn btn-success">Actualizar Usuario</button>
             </div>
         </div>
+
     </form>
     <br>
     <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
 
 </div>
-
 </body>
 </html>
