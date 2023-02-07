@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar usuario</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        a{
+        color:white;
+        }
+        a:hover{
+        color:black;
+        text-decoration:none;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Edite aquí los datos del usuario</h1>
+    <br>
+    <form th:action="@{/ActualizarUsuario}" th:object="${user}" method="post"> <!--90. Nombre la acción del botón ActualizarUsuario-->
+
+
+        <!--CAMPO PARA ID-->
+        <!--Este proceso es porque me trae información de id, para que me posibilite ver lo que trae en pantalla-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="id">ID(s) del usuario:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{id}" class="form-control" id="id" required="required">
+                    <!--hidden: tipo oculto(que no lo podemos editar)-->
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA NOMBRES-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="nombre">Nombre(s) del usuario:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA APELLIDOS-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="apellido">Apellido(s) del usuario:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{apellidos}" class="form-control" id="apellido" required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA TIPO DOCUMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="tipoDocumento">Tipo de Documento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{tipoDocumento}" class="form-control" id="tipoDocumento">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA NÚMERO DOCUMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="numeroDocumento">Número de Documento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{numeroDocumento}" class="form-control" id="numeroDocumento"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA DIRECCIÓN-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="direccion">Direción:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{direccion}" class="form-control" id="direccion"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA DEPARTAMENTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="departamento">Departamento:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{departamento}" class="form-control" id="departamento">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA EMAIL-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="email">Email:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{email}" class="form-control" id="email"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA TERMINO DE CONDICIONES-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="terminoCondiciones">Término de Condiciones:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{terminoCondiciones}" class="form-control" id="terminoCondiciones"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-success">Actualizar Usuario</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
+
+</div>
+
+</body>
+</html>

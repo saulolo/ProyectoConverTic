@@ -28,6 +28,14 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
 
 
 
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -67,10 +75,13 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
             <td th:text="${usuario.terminoCondiciones}"></td>
             <td>
                 <!--Creo los botones con bootstrap-->
-                <button type="button" class="btn btn-warning"><a th:href="@{/EditarUsuario}">Editar</a></button>
+                <button type="button" class="btn btn-warning"><a th:href="@{/EditarUsuario/{id}(id=${usuario.id})}">Editar</a>
+                </button>
+                <!--58.1. Creamos una variable llamada id, con un producto que viene de afuera y de ese mismo producto le vamos a decir que (id=${usuario.id})-->
+                <!--Lo mismo hacemos con nuestro botón Eliminar-->
             </td>
             <td>
-                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarUsuario}">Eliminar</a>
+                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarUsuario/{id}(id=${usuario.id})}">Eliminar</a>
                 </button>
                 <!--59. Como pudimos ver esto en pantalla?: Desde el html, busque el elemento que se llama usualist-->
                 <!--ese usualist, lo saque desde el controlador (ControllerFull), ese usualist era el atributo de un modelo-->

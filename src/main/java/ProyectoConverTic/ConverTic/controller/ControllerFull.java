@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -65,5 +66,22 @@ public class ControllerFull {
         }     //NOTA: El redireccionamiento es hacia servicios no hacia el html (paginas web)
         return "redirect:/agregarUsuario";  //83. En el caso de ser falso (o sea que no guardo) que me redireccione a la página agregarUsuario
     }
+
+    //SERVICIO EDITAR USUARIO
+    /*84. Procedo a agregar las funciones del botón editar, para ello creo dos servicios, uno que me muestre la información
+    que se registro y otro que una vez la edita, me actualice o guarde.*/
+    @GetMapping({"/EditarUsuario"})
+    public String editarUsuario(Model model, @PathVariable Integer id) { //85. Necesito los atributos de modelo y de Id que es como parte de la ruta de la página y para decirle que no es solo un Id sino que es una ruta, utilizo la anotación @PathVariable
+        Usuario user = usuarioService.getUsuarioById(id);   //86. Después de crear la variable user la busco por el servicio que creamos para buscar usuario por id  (getUsuarioById) y guardarla en la variable user que cree
+        model.addAttribute("user", user);       //87. Luego agregamos esa empresa a nuestro modelo para mandarlo a nuestro html, para alli llenar los campos.
+        return "editarUsuario";     //88. Esto me regresa (return) una página de html que vamos a crear y que se llama editarUsuario.
+    }
+
+    //89. Procedo a crear en el package tenplates, el html de editarUsuario
+
+
 }
+
+
+
 
