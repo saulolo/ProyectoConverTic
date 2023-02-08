@@ -74,6 +74,7 @@ public class ControllerFull {
     public String editarUsuario(Model model, @PathVariable Integer id) { //85. Necesito los atributos de modelo y de Id que es como parte de la ruta de la página y para decirle que no es solo un Id sino que es una ruta, utilizo la anotación @PathVariable
         Usuario user = usuarioService.getUsuarioById(id);   //86. Después de crear la variable user la busco por el servicio que creamos para buscar usuario por id  (getUsuarioById) y guardarla en la variable user que cree
         model.addAttribute("user", user);       //87. Luego agregamos esa empresa a nuestro modelo para mandarlo a nuestro html, para alli llenar los campos.
+        //Nota: Creamos un atributo para el modelo, que se llama igualmente user y es el que ira al html para llenar o alimentar campos.
         return "editarUsuario";     //88. Esto me regresa (return) una página de html que vamos a crear y que se llama editarUsuario.
     }
     //89. Procedo a crear en el package tenplates, el html de editarUsuario
@@ -88,7 +89,17 @@ public class ControllerFull {
         return "redirect:/editarUsuario";
     }
 
-
+    //SERVICIO ELIMINAR USUARIO
+    //93. Procedo a agregar las funciones del botón Eliminar usuario
+    //Sabemos que nos va a pedir el id porque el servicio lo diseñamos desde el principio asi.
+    @GetMapping("/EliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable Integer id) { // Solo necesito el atributo id y no el model porque yo no estoy enviando ninguna información a ninguna pagina de html, estoy es eliminando un registro.
+        if (usuarioService.deleteUsuario(id)) {  //Puedo dejar solo esta linea sin los return, porque me llega al mismo lugar.
+            return "redirect:/VerUsuarios";
+        }
+        return "redirect:/VerUsuarios";
+    }
+    
 }
 
 
