@@ -1,24 +1,33 @@
-<!--57. Creó la clase verUsuario.html pero esta vez voy a trabajar con un template de bootstrap, dirección:
-https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
-
+<!--[57]-->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--Recurso que me llama ls librería Thymeleaf para usar su motor-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!--[57.1]-->
 <head>
     <title>Lista de Usuarios</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!--[57.2]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!--112. Me traigo el boostrap de los tostr que importe en mi scrip de mensajes-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!--116. pego este scrip de bootstrap para que me funcione los cuadros de los mensajses-->
     <style>
         a{
         color:white;
         }
         a:hover{
-        color:black;
+        color: black;
         text-decoration:none;
         }
+
+
+
+
+
+
+
+
 
 
     </style>
@@ -27,7 +36,7 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
 
 <div class="container">
     <h1>Lista de Usuarios</h1>
-    <!--DIBUJAMOS LA TABLA-->
+    <!-- [58] DIBUJAMOS LA TABLA-->
     <br>
     <table class="table table-hover table-bordered">
         <tr>
@@ -44,12 +53,9 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
             <th>Eliminar</th>
         </tr>
 
-        <!--LLENAMOS LA TABLA DIBUJADA-->
-        <!--58. En nuestro controller, creamos en viewUsuario un modelo con un atributo llamado usualist donde esta guardaba la lista de todos los usuarios-->
-        <tr th:each="usuario : ${usualist}">  <!--usuario: aqui puede ser el nombre que yo quiera-->
-            <!--Creo las filas con los nombres de los atributos de mi clase Usuario-->
-            <!--$ quiere decir que va a buscar de otros recursos que no son propios de html en este caso de thymeleaf-->
-            <td th:text="${usuario.id}"></td>
+        <!--[58.1] LLENAMOS LA TABLA DIBUJADA-->
+        <tr th:each="usuario : ${usualist}">  <!--[58.2]-->
+            <td th:text="${usuario.id}"></td>  <!--[58.3] y [58.4]-->
             <td th:text="${usuario.numeroDocumento}"></td>
             <td th:text="${usuario.tipoDocumento}"></td>
             <td th:text="${usuario.nombres}"></td>
@@ -59,32 +65,67 @@ https://www.w3schools.com/bootstrap/bootstrap_theme_me.asp-->
             <td th:text="${usuario.departamento}"></td>
             <td th:text="${usuario.terminoCondiciones}"></td>
             <td>
-                <!--Creo los botones con bootstrap-->
+                <!--[58.5] Creo los botones-->
                 <button type="button" class="btn btn-warning"><a th:href="@{/EditarUsuario/{id}(id=${usuario.id})}">Editar</a>
                 </button>
-                <!--58.1. Creamos una variable llamada id, con un producto que viene de afuera y de ese mismo producto le vamos a decir que (id=${usuario.id})-->
-                <!--Lo mismo hacemos con nuestro botón Eliminar-->
+                <!--[58.6]-->
             </td>
             <td>
+                <!--[59]-->
                 <button type="button" class="btn btn-danger"><a th:href="@{/EliminarUsuario/{id}(id=${usuario.id})}">Eliminar</a>
                 </button>
-                <!--59. Como pudimos ver esto en pantalla?: Desde el html, busque el elemento que se llama usualist-->
-                <!--ese usualist, lo saque desde el controlador (ControllerFull), ese usualist era el atributo de un modelo-->
-                <!--que estaba alimentado por listaUsuario, listaUsuario es una lista que yo creé y la alimente de lo que conseguía-->
-                <!--un servicio o un método que estaba en mi UsuarioService creado que se llama getAllUsuarios, este a su vez-->
-                <!--esta unido al repositorio UsuarioRepository con el cual podía usar recursos de JPA y buscar lo que esta en la BD-->
-                <!--ya que JPA se ocupa de eso con el hibernate (el sabe cual es la entidad, donde está, etc-->
             </td>
         </tr>
     </table>
-    <!--60. Vamos a crear un botón que sirva para crear nuevos usuarios-->
+    <!--[60]-->
     <button type="button" class="btn btn-info"><a th:href="@{/AgregarUsuario}">Agregar Nuevo Usuario</a>
     </button>
-    <!--61. Me dirijo a crear los otros servicios en este caso el de Agregar Usuario en la clase ControllerFull para enlazarlo con este botón que acabo de crear-->
-    <!--target(El atributo de destino especifica dónde abrir el documento vinculado) :(_blank: abre en nueva página; _parent: abre en la misma página; _self: abre el contenido en un marco principal; _top: abre en la parte superior)-->
-
+    <!--[61]-->
+    <!--[62] -->
 
 </div>
+<!---->
+<!--103. th:inline="javascript", esto quiere decir que a partir de estas lineas voy a trabajar con javascript y que con js voy a trabajar el elemnto que voy a traer de aguera-->
+<!--104. window.onload=function(){ creo una función que me genere una ventana pequeña (window) y que cargue (onload) un mensaje y va a teenr una función-->
+<!--105. creo una variable que llamo como quiera (msg) que se va a alimentar del mensaje que traigo de afuera ${mensaje} -->
+<!--106. a parte le digo que verifique que llega en esa variable, pues puede ser "Error!!: Guardado no realizado." y todos los mensaje que creamos en el ControllerFull-->
+<!--107. ejemplo, if (msg =="saveOk") necesito que me genere una ventana emergente-->
+<!--108. Command : toastr["success"]} :utilizo la plantilla (success según boostrat es de color verde, error de color rojo y danger naranja) de toast que me trae boostrap y que me diga el mensaje Usuario creado con éxito!-->
+<!--109. Establecemos un else if con los siguientes mensajes que me traigo de ControllerFull: msg == "updateOk"-->
+<!--110. y que me ponga el mensaje Usuario actualizado con éxito!-->
+<!--111. y asi para los demas elses if con los mensajes que restantes que llegan-->
+<!--112. Le doy opciones a mi ventanita toastr con .options={}-->
+<!--113. Los estilos se llaman entre comillas y para indicar que quiero la posición  arriba a al derecha lo hago con "toast-top-right"-->
+<!--114. showDuration con esta propiedad establesco el tiempo de duración de la ventana en milisegundos-->
+<!--115. "showMethod": "fadeIn": efecto de exposición del mensaje y que se vaya con un "hideMethod": "fadeOut";-->
+<script th:inline="javascript">
+    window.onload=function(){
+
+        var msg= [[${mensaje}]];
+        if (msg == "saveOK"){
+            Command : toastr["success"]("Usuario creado con éxito!")
+            }
+        else if (msg == "updateOK"){
+            Command : toastr["success"]("Usuario actualizado con éxito!")
+        }
+        else if (msg == "deleteOK"){
+            Command : toastr["error"]("Usuario eliminado con éxito!")
+        }
+        else if (msg == "deleteError"){
+            Command : toastr["error"]("Usuario no ha sido eliminado!")
+        }
+        toastr.options={
+            "positionClass": "toast-top-right",
+            "showDuration":"300",
+            "showMethod":"fadeIn",
+            "hideMethod":"fadeOut",
+        }
+    }
+
+</script>
+
 
 </body>
+
+
 </html>

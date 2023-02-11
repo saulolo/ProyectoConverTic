@@ -33,8 +33,8 @@ public class Carrito {
     private ProductoVenta productoVenta;
 
 
-    //20. Creo constructores (ya se implementaron con @Data)
+    //[20]
 
-    //21. creo los Getter and Setter (ya se implementaron con @Data)
+    //[21]
 
 }

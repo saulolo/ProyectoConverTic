@@ -20,15 +20,15 @@ public class Producto {
     private int id;
     @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
-    @OneToMany(fetch = FetchType.LAZY) //Carga lenta
-    @JoinColumn(name = "id_producto_detalle") //me revienta porque necesito guardar en una lista por el tipo de relación
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_producto_detalle")
     private List<ProductoDetalle> listaProductos;
     @Column(name = "precio", nullable = false)
     private double precio;
 
 
-    //20. Creo constructores (los creé con las anotaciones de lombok).
+    //[20] Creo constructores (los creé con las anotaciones de lombok).
 
-    //21. creo los Getter and Setter (los creé con las anotaciones de lombok)
+    //[21] creo los Getter and Setter (los creé con las anotaciones de lombok)
 
 }

@@ -5,101 +5,90 @@ import ProyectoConverTic.ConverTic.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-//43. Creamos la clase Controller, aqui iran todas lac conexiones del aplicativo.
+//[43]
 
-@Controller  //45. Vamos a utilizar @Controller
-/*1. Hace un llamado al servidor y me va a traer una respuesta que me va a dejar ver en pantalla.
-la diferencia con el @Controller es que éste trabaja protocolo de comunicación http, o sea trae por respuestas información
-em formato xml, html y utiliza comandos diferentes a get y post y cuando trabajamos @RestController se comunica con
-respuestas diferentes, puede traer un json, bloques de información, es como una version más nueva de un controlador normal*/
-/*44. Aplicativo de spring boot que se comunica con el servidor le dice que este va hacer el main.
-(me lo traigo de la clase ConverTicAplication para indicar que desde aqui se hará la comunicación.*/
+//[1]
+@Controller  //[44]
+//[45]
 
 public class ControllerFull {
-    @Autowired  //47. Traigo esta anotación para poder decirle a Spring que vamos a utilizar los métodos de la clase que instanciamos.
-    UsuarioService usuarioService; //46. Instancio el objeto UsuarioService para poderme traer todos sus métodos.
+    @Autowired  //[47]
+    UsuarioService usuarioService; //[46]
 
-    //SERVICIO VER USUARIO
-    @GetMapping({"/", "VerUsuarios"}) //49. Creo dos landing para visualizarlo en el html.
-    public String viewUsuario(Model model) {  //50. Creamos un método viewEmpresas(nombre opcional) que regrese cadenas.
-        List<Usuario> listaUsuario = usuarioService.getAllUsuarios(); //51. Hay una clase inmersa en nuestros procesos la cual no vamos a crear pero podemos
-        model.addAttribute("usualist", listaUsuario); //usar y es la clase model, el cual se va a alimentar de una lista, en este caso la de Usuario.
-        return "VerUsuarios";                                //Esa lista la saco de usuarioService y miro los métodos que me trae, en este caso getAllUsuarios().
-    }                                  //52. Model entiende que lo que estamos trabajando es objeto modelable al que le puedo setear ciertas características.
-    //53. Utilizo mi clase model para agregar atributos(modelar) a mis listaUsuarios.
-    //54. me retorna un String que es VerUsuarios, el cual es super importante porque va hacer el nombre de la pagina html donde voy a poder ver los usuarios.
-    //y tal cual debe de ir copiado en el package template de html.
-    //Nota: para que esto se ejecute debo tener la dependencia de Thymeleaf instalada.
+    //SERVICIO VER USUARIO [48]
+    @GetMapping({"/", "VerUsuarios"}) //[49]
+    public String viewUsuario(Model model, @ModelAttribute("mensaje") String mensaje) { //[50], [51], [52], [53], [98] y [102]
+        List<Usuario> listaUsuario = usuarioService.getAllUsuarios();
+        model.addAttribute("usualist", listaUsuario);
+        model.addAttribute("mensaje", mensaje); //[99]
+        return "VerUsuarios";   //[54]
+    }
 
-    /*55. Cuando ejecute el código en este punto, me va a salir un error porque él esta esperando una salida por html y como
-    aun no he generado el template, me sale un error esperado. Para ello vamos al package resources / templates, (en caso de
-    que no exista la carpeta templates, la creamos haciendo click derecho en el package resources / new / Directory)*/
 
-    /*56. Voy al package templates, click derecho new / html file y le pongo el mismo nombre de mi return en el microservicio
-    a ese archivo, en este caso el de VerUsuarios.*/
+    //[55] Creamos el package templates
+
+    //[56] Creamos el Template verUsuarios
 
 
     //SERVICIO AGREGAR USUARIO
-    @GetMapping({"/AgregarUsuario"})
-    public String nuevoUsuario(Model model) {  //63. String porque me devuelve el nombre del template e inserto un artefacto modelable
-        Usuario user = new Usuario();  //64. Creamos un objeto de tipo Usuario gracias al constructor vacío para poderlo llamar en el front
-        model.addAttribute("user", user);  //65. Nombre atributo "user" y en este atributo meto el usuario que acabo de crear user
-        return "agregarUsuario";  //66. Me va a direccionar a la página agregarUsuario
+    @GetMapping("/AgregarUsuario") //[100]
+    public String nuevoUsuario(Model model, @ModelAttribute("mensaje") String mensaje) {  //[63]
+        Usuario user = new Usuario();  //[64]
+        model.addAttribute("user", user);  //[65]
+        model.addAttribute("mensaje", mensaje);
+        return "agregarUsuario";  //[66]
     }
-    //67. Procedo a crear el template agregarUsuario
+    //[67] Procedo a crear el template agregarUsuario
 
-    //78. Procedo a crear el servicio para guardar el usuario
-    //SERVICIO GUARDAR USUARIO
-    @PostMapping("/GuardarUsuario")
-    //79. El servicio a utilizar es @PostMapping porque necesitamos enviar la información(setear)
-    public String guardarUsuarios(Usuario user, RedirectAttributes redirectAttributes) { //80. RedirectAttributes es un atributo que me indica que ese método me va a redireccionar a algún lugar
-        if (usuarioService.saveOrUpdateUsuario(user) == true) { //81. tenemos dos opciones crear un objeto de respuesta o verificar la respuesta desde el principio (nos vamos por esta última).
-            return "redirect:/VerUsuarios";   //82. Verificamos esta ejecución desde el principio con condicionales, en el caso de ser verdadero (o sea que la creó) que me redireccione a la página VerUsuarios
-        }     //NOTA: El redireccionamiento es hacia servicios no hacia el html (paginas web)
-        return "redirect:/agregarUsuario";  //83. En el caso de ser falso (o sea que no guardo) que me redireccione a la página agregarUsuario
+    //SERVICIO GUARDAR USUARIO [78]
+    @PostMapping("/GuardarUsuario") //[79]
+    public String guardarUsuarios(Usuario user, RedirectAttributes redirectAttributes) { //[80]
+        if (usuarioService.saveOrUpdateUsuario(user) == true) { //[81]
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");  //[94] y [95]
+            return "redirect:/VerUsuarios";  //[95.1] y [82]
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "saveError"); //[96]
+        return "redirect:/agregarUsuario";  //[83]
     }
 
     //SERVICIO EDITAR USUARIO
-    /*84. Procedo a agregar las funciones del botón editar, para ello creo dos servicios, uno que me muestre la información
-    que se registro y otro que una vez la edita, me actualice o guarde.*/
-    @GetMapping("/EditarUsuario/{id}") //Poniendo el id como ruta tambien.
-    public String editarUsuario(Model model, @PathVariable Integer id) { //85. Necesito los atributos de modelo y de Id que es como parte de la ruta de la página y para decirle que no es solo un Id sino que es una ruta, utilizo la anotación @PathVariable
-        Usuario user = usuarioService.getUsuarioById(id);   //86. Después de crear la variable user la busco por el servicio que creamos para buscar usuario por id  (getUsuarioById) y guardarla en la variable user que cree
-        model.addAttribute("user", user);       //87. Luego agregamos esa empresa a nuestro modelo para mandarlo a nuestro html, para alli llenar los campos.
-        //Nota: Creamos un atributo para el modelo, que se llama igualmente user y es el que ira al html para llenar o alimentar campos.
-        return "editarUsuario";     //88. Esto me regresa (return) una página de html que vamos a crear y que se llama editarUsuario.
+    @GetMapping("/EditarUsuario/{id}") //[84] y [101]
+    public String editarUsuario(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje) { //[85]
+        Usuario user = usuarioService.getUsuarioById(id);   //[86]
+        model.addAttribute("user", user);  //[87]
+        model.addAttribute("mensaje", mensaje);
+        return "editarUsuario";     //[88]
     }
-    //89. Procedo a crear en el package tenplates, el html de editarUsuario
+    //[89]. Creo el html editarUsuario
 
-    //SERVICIO ACTUALIZAR USUARIO
-    //92. Procedo a agregar las funciones del botón Actualizar usuario
-    @PostMapping("/ActualizarUsuario") //el nombre tiene que coincidir con la ruta que le asigne en editar usuario (90)
-    public String updateUsuario(Usuario user) {
-        if (usuarioService.saveOrUpdateUsuario(user) == true) { //Basica/ es el mismo método que en el servicio guardar usuario (78)
-            return "redirect:/VerUsuarios";  //Nota: No hay necesidad de poner == true, por defecto asume que es true
-        }
-        return "redirect:/editarUsuario";
-    }
 
-    //SERVICIO ELIMINAR USUARIO
-    //93. Procedo a agregar las funciones del botón Eliminar usuario
-    //Sabemos que nos va a pedir el id porque el servicio lo diseñamos desde el principio asi.
-    @GetMapping("/EliminarUsuario/{id}")
-    public String eliminarUsuario(@PathVariable Integer id) { // Solo necesito el atributo id y no el model porque yo no estoy enviando ninguna información a ninguna pagina de html, estoy es eliminando un registro.
-        if (usuarioService.deleteUsuario(id)) {  //Puedo dejar solo esta linea sin los return, porque me llega al mismo lugar.
+    //SERVICIO ACTUALIZAR USUARIO [92]
+    @PostMapping("/ActualizarUsuario") //[92.1]
+    public String updateUsuario(@ModelAttribute("user") Usuario user, RedirectAttributes redirectAttributes) {
+        if (usuarioService.saveOrUpdateUsuario(user)) { //[92.2]
+            redirectAttributes.addFlashAttribute("mensaje", "updateOK"); //[97]
             return "redirect:/VerUsuarios";
         }
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
+        return "redirect:/EditarUsuario";
+    }
+
+    //SERVICIO ELIMINAR USUARIO [93]
+    @GetMapping("/EliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable Integer id, RedirectAttributes redirectAttributes) { //[93.1]
+        if (usuarioService.deleteUsuario(id) == true) {  //[93.2]
+            redirectAttributes.addFlashAttribute("mensaje", "deleteOK");  //[97.1]
+            return "redirect:/VerUsuarios";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "deleteError");
         return "redirect:/VerUsuarios";
     }
-    
+
 }
 
 
