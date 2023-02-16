@@ -28,10 +28,6 @@
 
 
 
-
-
-
-
     </style>
 </head>
 <body>
@@ -44,28 +40,35 @@
         <tr>
             <th>ID</th>
             <th>Nombre Producto</th>
-            <th>Lista de Producto</th>
-            <th>Precio</th>
+            <th>Genero</th>
+            <th>Marca</th>
+            <th>Talla</th>
+            <th>Color</th>
+            <th>Categoría</th>
+            <th>Cantidad</th>
+            <th>Precio unidad</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
 
         <!--[133] LLENAMOS LA TABLA DIBUJADA-->
-        <tr th:each="empleado : ${prodlist}">  <!--[58.2]-->
-            <td th:text="${empleado.id}"></td>  <!--[58.3] y [58.4]-->
-            <td th:text="${empleado.nombreProducto}"></td>
-            <td th:text="${empleado.listaProductos}"></td> <!--[134] Tengo dudad de como genero esta lista-->
-            <td th:text="${empleado.precio}"></td>
+        <tr th:each="producto : ${prodlist}">  <!--[58.2]-->
+            <td th:text="${producto.id}"></td>  <!--[58.3] y [58.4]-->
+            <td th:text="${producto.nombreProducto}"></td>
+            <td th:text="${producto.listaProductos}"></td> <!--[134] Tengo dudad de como genero esta lista-->
+            <td th:text="${producto.precio}"></td>
             <td>
                 <!--[58.5] Creo los botones-->
-                <button type="button" class="btn btn-warning"><a th:href="@{/EditarProducto/{id}(id=${producto.id})}">Editar</a>
-                </button>
+                <!-- <button type="button" class="btn btn-warning"><a th:href="@{/EditarProducto/{id}(id=${producto.id})}">Editar</a>
+                 </button>
+                 -->
                 <!--[58.6]-->
             </td>
             <td>
                 <!--[59]-->
-                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarProducto/{id}(id=${producto.id})}">Eliminar</a>
-                </button>
+                <!-- <button type="button" class="btn btn-danger"><a th:href="@{/EliminarProducto/{id}(id=${producto.id})}">Eliminar</a>
+                 </button>
+                 -->
             </td>
         </tr>
     </table>
@@ -102,6 +105,16 @@
 
         //[116] Me voy para la Interface ProductoDetalleRepository.
     }
+
+
+
+
+
+
+
+
+
+
 
 
 

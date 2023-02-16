@@ -192,6 +192,17 @@ public class ControllerFull {
         //[133] Creo el html de agregarProducto en templates (para tener el mismo archivo de agregarUsuario, le doy click derecho en agregarUsuario - Refactor - coyfile y lo nombro agregarProducto)
     }
 
+    //SERVICIO GUARDAR PRODUCTOS [141] Creo el servicio para el botón Guardar productos
+    @PostMapping("/GuardarProducto")
+    public String guardarProducto(Producto prod, RedirectAttributes redirectAttributes) {
+        if (productoService.saveOrUpdateProducto(prod) == true) {
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");
+            return "redirect:/VerProductos";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "saveError");
+        return "redirect:/AgregarProducto";
+    }
+
 
     /*--------------------------------------------------------------------------------------*/
     /* SERVICIOS DEL INVENTARIO */
