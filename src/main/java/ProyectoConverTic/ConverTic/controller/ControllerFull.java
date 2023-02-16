@@ -1,13 +1,7 @@
 package ProyectoConverTic.ConverTic.controller;
 
-import ProyectoConverTic.ConverTic.modelo.Inventario;
-import ProyectoConverTic.ConverTic.modelo.Producto;
-import ProyectoConverTic.ConverTic.modelo.ProductoDetalle;
-import ProyectoConverTic.ConverTic.modelo.Usuario;
-import ProyectoConverTic.ConverTic.service.InventarioService;
-import ProyectoConverTic.ConverTic.service.ProductoDetalleService;
-import ProyectoConverTic.ConverTic.service.ProductoService;
-import ProyectoConverTic.ConverTic.service.UsuarioService;
+import ProyectoConverTic.ConverTic.modelo.*;
+import ProyectoConverTic.ConverTic.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -152,6 +146,8 @@ public class ControllerFull {
 
     @Autowired
     ProductoService productoService;
+    @Autowired
+    GeneroService generoService;
 
     //SERVICIO VER PRODUCTOS
     @GetMapping({"/VerProductos"})
@@ -170,8 +166,10 @@ public class ControllerFull {
         Producto prod = new Producto(); //[138] Cuando ejecute este controlador y el controlador me lleve hasta su html, este va a llegar con:
         model.addAttribute("prod", prod); //[138.1] va a llegar con un objeto producto que es que esta en el front donde le meto valores a travez del tempate creado
         model.addAttribute("mensaje", mensaje); //[138.2] va a llegar con un posible mensaje que es el que utilizo para generar las ventanas emergentes y va a llegar con [138.3] una lista de detalles de productos, como se lo construí en la línea siguiente
-        List<ProductoDetalle> listaProductoDetalle = productoDetalleService.getAllProductoDetalle(); //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
-        model.addAttribute("produDetalist", listaProductoDetalle);  //[137] Luego lo agrego al modelo como atributo, el cual le pongo como nombre produDetalist que se alimenta de la lista creada en la liena anterior
+        List<Genero> listaGenero = generoService.getAllGenero();
+        model.addAttribute("generoList", listaGenero);
+        //List<ProductoDetalle> listaProductoDetalle = productoDetalleService.getAllProductoDetalle(); //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
+        //model.addAttribute("produDetalist", listaProductoDetalle);  //[137] Luego lo agrego al modelo como atributo, el cual le pongo como nombre produDetalist que se alimenta de la lista creada en la liena anterior
         return "agregarProducto";
         //[133] Creo el html de agregarProducto en templates (para tener el mismo archivo de agregarUsuario, le doy click derecho en agregarUsuario - Refactor - coyfile y lo nombro agregarProducto)
     }

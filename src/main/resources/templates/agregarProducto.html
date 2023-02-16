@@ -23,6 +23,9 @@
 
 
 
+
+
+
     </style>
 </head>
 <body>
@@ -50,12 +53,12 @@
         <!--[135] En este formulario debo de hacer llegar aquí, la lista que de detalles que se va a desplegar, para eso me regreso al controlador en su servicio agregar productos-->
         <div class="row">
             <div class="form-group col-md-12">
-                <label class="col-md-3" for="listProdDet">Lista detalles de productos:</label>
+                <label class="col-md-3" for="listGenero">Genero:</label>
                 <div class="col-md-6">
                     <!--[139] Ya no es de tipo input sino select y dentro de él pongo las posibles opciones-->
-                    <select th:field="*{listaProductos}" class="form-control" id="listProdDet" required="required">
-                        <option th:each="productoDetalle : ${produDetalist}" th:text="${productoDetalle.marca}"
-                                th:value="${productoDetalle.id}"></option>
+                    <select th:field="*{listaProductos}" class="form-control" id="listGenero" required="required">
+                        <option th:each="productoGenero : ${generoList}" th:text="${productoGenero.nombreGenero}"
+                                th:value="${productoGenero.id}"></option>
                         <!--[140] Las opciones salen de la iteración produDetalist y eso lo hago con un each(aqui no hay for) cada producto que se encuentre en el objeto produDetalist muestreme en pantalla la marca pero el valor que va a guardar es el id -->
                     </select>
                 </div>
