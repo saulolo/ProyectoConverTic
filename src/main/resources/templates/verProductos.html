@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"> <!--[57.1]-->
 <head>
-    <title>Lista de Usuarios</title>
+    <title>Lista de Productos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!--[57.2]-->
@@ -22,55 +22,55 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Lista de Usuarios</h1>
+    <h1>Lista de Productos</h1>
     <!-- [58] DIBUJAMOS LA TABLA-->
     <br>
     <table class="table table-hover table-bordered">
         <tr>
             <th>ID</th>
-            <th>Número Documento</th>
-            <th>Tipo Documento</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Email</th>
-            <th>Dirección</th>
-            <th>Departamento</th>
-            <th>Termino de Condiciones</th>
+            <th>Nombre Producto</th>
+            <th>Lista de Producto</th>
+            <th>Precio</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
 
-        <!--[58.1] LLENAMOS LA TABLA DIBUJADA-->
-        <tr th:each="usuario : ${usualist}">  <!--[58.2]-->
-            <td th:text="${usuario.id}"></td>  <!--[58.3] y [58.4]-->
-            <td th:text="${usuario.numeroDocumento}"></td>
-            <td th:text="${usuario.tipoDocumento}"></td>
-            <td th:text="${usuario.nombres}"></td>
-            <td th:text="${usuario.apellidos}"></td>
-            <td th:text="${usuario.email}"></td>
-            <td th:text="${usuario.direccion}"></td>
-            <td th:text="${usuario.departamento}"></td>
-            <td th:text="${usuario.terminoCondiciones}"></td>
+        <!--[133] LLENAMOS LA TABLA DIBUJADA-->
+        <tr th:each="empleado : ${prodlist}">  <!--[58.2]-->
+            <td th:text="${empleado.id}"></td>  <!--[58.3] y [58.4]-->
+            <td th:text="${empleado.nombreProducto}"></td>
+            <td th:text="${empleado.listaProductos}"></td> <!--[134] Tengo dudad de como genero esta lista-->
+            <td th:text="${empleado.precio}"></td>
             <td>
                 <!--[58.5] Creo los botones-->
-                <button type="button" class="btn btn-warning"><a th:href="@{/EditarUsuario/{id}(id=${usuario.id})}">Editar</a>
+                <button type="button" class="btn btn-warning"><a th:href="@{/EditarProducto/{id}(id=${producto.id})}">Editar</a>
                 </button>
                 <!--[58.6]-->
             </td>
             <td>
                 <!--[59]-->
-                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarUsuario/{id}(id=${usuario.id})}">Eliminar</a>
+                <button type="button" class="btn btn-danger"><a th:href="@{/EliminarProducto/{id}(id=${producto.id})}">Eliminar</a>
                 </button>
             </td>
         </tr>
     </table>
     <!--[60]-->
-    <button type="button" class="btn btn-info"><a th:href="@{/AgregarUsuario}">Agregar Nuevo Usuario</a>
+    <button type="button" class="btn btn-info"><a th:href="@{/AgregarProducto}">Agregar Nuevo Producto</a>
     </button>
     <!--[61]-->
     <!--[62] -->
@@ -82,16 +82,16 @@
 
         var msg= [[${mensaje}]];                                            //[105]
         if (msg == "saveOK"){                                               //<[106] y [107]
-            Command : toastr["success"]("Usuario creado con éxito!")        //[108]
+            Command : toastr["success"]("Producto creado con éxito!")        //[108]
             }
         else if (msg == "updateOK"){                                        //[109]
-            Command : toastr["success"]("Usuario actualizado con éxito!")   //[110]
+            Command : toastr["success"]("Producto actualizado con éxito!")   //[110]
         }
         else if (msg == "deleteOK"){                                         //[111]
-            Command : toastr["error"]("Usuario eliminado con éxito!")
+            Command : toastr["error"]("Registro de producto eliminado con éxito!")
         }
         else if (msg == "deleteError"){
-            Command : toastr["error"]("Usuario no ha sido eliminado!")
+            Command : toastr["error"]("Registro de producto no ha sido eliminado!")
         }
         toastr.options={                                                    //[112]
             "positionClass": "toast-top-right",                             //[113]
@@ -102,6 +102,19 @@
 
         //[116] Me voy para la Interface ProductoDetalleRepository.
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

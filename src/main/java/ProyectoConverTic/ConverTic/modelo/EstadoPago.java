@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class EstadoPago {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado_pago", nullable = false)
     private int id;
     @Column(name = "estado", nullable = false)

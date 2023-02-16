@@ -1,6 +1,12 @@
 package ProyectoConverTic.ConverTic.controller;
 
+import ProyectoConverTic.ConverTic.modelo.Inventario;
+import ProyectoConverTic.ConverTic.modelo.Producto;
+import ProyectoConverTic.ConverTic.modelo.ProductoDetalle;
 import ProyectoConverTic.ConverTic.modelo.Usuario;
+import ProyectoConverTic.ConverTic.service.InventarioService;
+import ProyectoConverTic.ConverTic.service.ProductoDetalleService;
+import ProyectoConverTic.ConverTic.service.ProductoService;
 import ProyectoConverTic.ConverTic.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 //[43]
 
@@ -17,8 +24,11 @@ import java.util.List;
 //[45]
 
 public class ControllerFull {
+
+    /*--------------------------------------------------------------------------------------*/
+    /* SERVICIOS DEL USUARIO */
     @Autowired  //[47]
-    UsuarioService usuarioService; //[46]
+            UsuarioService usuarioService; //[46]
 
     //SERVICIO VER USUARIO [48]
     @GetMapping({"/", "VerUsuarios"}) //[49]
@@ -87,6 +97,102 @@ public class ControllerFull {
         }
         redirectAttributes.addFlashAttribute("mensaje", "deleteError");
         return "redirect:/VerUsuarios";
+    }
+
+    /*--------------------------------------------------------------------------------------*/
+    /* SERVICIOS DE PRODUCTO DETALLE */  //[124]
+
+    @Autowired
+    ProductoDetalleService productoDetalleService;
+
+    //SERVICIO VER PRODUCTO DETALLE
+    @GetMapping("/productoDetalle")
+    public List<ProductoDetalle> verProductoDetalles() {
+        return productoDetalleService.getAllProductoDetalle();
+    }
+
+/*  //SERVICIO GUARDAR PRODUCTO DETALLE  (Este método no puede estar aqui porque no voy a crear productos de detalle según mi Model E-R)
+    @PostMapping("/productoDetalle")
+    public Optional<ProductoDetalle> guardarProductoDetalle(@RequestBody ProductoDetalle prodDell) {  //[125]
+        return Optional.ofNullable(this.productoDetalleService.saveOrUpdateProductoDetalle(prodDell)); //[126]
+    }*/
+
+    //SERVICIO BUSCAR/VER PRODUCTO DETALLE POR ID
+    @GetMapping(path = "/productoDetalle{id}")
+    public Optional<ProductoDetalle> productoDetallePorId(@PathVariable("id") Integer id) {
+        return this.productoDetalleService.getProductoDetalleById(id);
+
+
+    }
+
+    //ACTUALIZAR EL JSON PRODUCTO DETALLE POR SUS ATRIBUTOS (No se si necesito este service aqui, porque la actualización no se hace desde esta clase)
+    @PatchMapping("productoDetalle/{id}")
+    public ProductoDetalle actualizarProductoDetalle(@PathVariable("id") Integer id, @RequestBody ProductoDetalle productoDetalle) {
+        ProductoDetalle productoDetalle1 = productoDetalleService.getProductoDetalleById(id).get();
+        productoDetalle1.setListaProductos(productoDetalle.getListaProductos());
+        return productoDetalleService.saveOrUpdateProductoDetalle(productoDetalle1);
+    }
+
+    //ELIMINAR LOS REGISTROS PRODUCTO DETALLE DE LA BD
+    @DeleteMapping("/productoDetalle/{id}")
+    public String DeleteProductoDetalle(@PathVariable("id") Integer id) {
+        boolean respuesta = productoDetalleService.deleteProductoDetalle(id);
+        if (respuesta) {
+            return "Se pudo eliminar correctamente el producto detalle con id " + id;
+        } else {
+            return "No se puede eliminar la correctamente el producto detalle con id " + id;
+        }
+    }
+
+    //SERVICIO BUSCAR/VER PRODUCTO DETALLE QUE PERTENECEN AL USUARIO
+
+
+    /*--------------------------------------------------------------------------------------*/
+    /* SERVICIOS DE PRODUCTO  */  //[131]
+
+    @Autowired
+    ProductoService productoService;
+
+    //SERVICIO VER PRODUCTOS
+    @GetMapping({"/VerProductos"})
+    public String viewProductos(Model model, @ModelAttribute("mensaje") String mensaje) {
+        List<Producto> listaProductos = productoService.getAllProducto();
+        model.addAttribute("prodlist", listaProductos);
+        model.addAttribute("mensaje", mensaje);
+        return "verProductos";
+        //[132] Creo el html de verProductos en templates (para tener el mismo archivo de verUsuarios, le doy click derecho en verUsuarios - Refactor - coyfile y lo nombro verProductos)
+
+    }
+
+    //SERVICIO AGREGAR PRODUCTOS
+    @GetMapping("/AgregarProducto")
+    public String nuevoProducto(Model model, @ModelAttribute("mensaje") String mensaje) {
+        Producto prod = new Producto(); //[138] Cuando ejecute este controlador y el controlador me lleve hasta su html, este va a llegar con:
+        model.addAttribute("prod", prod); //[138.1] va a llegar con un objeto producto que es que esta en el front donde le meto valores a travez del tempate creado
+        model.addAttribute("mensaje", mensaje); //[138.2] va a llegar con un posible mensaje que es el que utilizo para generar las ventanas emergentes y va a llegar con [138.3] una lista de detalles de productos, como se lo construí en la línea siguiente
+        List<ProductoDetalle> listaProductoDetalle = productoDetalleService.getAllProductoDetalle(); //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
+        model.addAttribute("produDetalist", listaProductoDetalle);  //[137] Luego lo agrego al modelo como atributo, el cual le pongo como nombre produDetalist que se alimenta de la lista creada en la liena anterior
+        return "agregarProducto";
+        //[133] Creo el html de agregarProducto en templates (para tener el mismo archivo de agregarUsuario, le doy click derecho en agregarUsuario - Refactor - coyfile y lo nombro agregarProducto)
+    }
+
+
+    /*--------------------------------------------------------------------------------------*/
+    /* SERVICIOS DEL INVENTARIO */
+    @Autowired
+    InventarioService inventarioService;
+
+
+    //SERVICIO AGREGAR INVENTARIO [142]
+    @GetMapping("/AgregarInventario")
+    public String nuevoInventario(Model model, @ModelAttribute("mensaje") String mensaje) {
+        Inventario inv = new Inventario();
+        model.addAttribute("inv", inv);
+        model.addAttribute("mensaje", mensaje);
+        List<Inventario> listaInventario = inventarioService.getAllInventario();
+        model.addAttribute("inveList", listaInventario);
+        return "agregarProducto";
+
     }
 
 }

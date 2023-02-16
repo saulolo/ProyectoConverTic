@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class TipoDocumento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "id_tipo_documento", nullable = false)
     private int id;

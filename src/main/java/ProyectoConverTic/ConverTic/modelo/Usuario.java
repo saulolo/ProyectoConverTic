@@ -16,9 +16,9 @@ import java.util.List;
 public class Usuario {
 
     //[6] Atributos
-    
+
     @Id //[7]
-    @GeneratedValue(strategy = GenerationType.AUTO) //[8]
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //[8] [127]
     @Column(name = "id_usuario", nullable = false) //[8.2]
     private int id;
     @Column(name = "direccion", nullable = false) //[8.1]

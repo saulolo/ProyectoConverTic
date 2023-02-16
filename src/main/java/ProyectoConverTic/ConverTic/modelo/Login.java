@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Login {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_carrito", nullable = false)
     private int id;
     @Column(name = "usuario", nullable = false)

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Calificacion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_calificacion", nullable = false)
     private int id;
     @Column(name = "valor_calificacion", nullable = false)

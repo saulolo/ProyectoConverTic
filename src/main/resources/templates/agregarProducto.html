@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar nuevo producto</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        a{
+        color:white;
+        }
+        a:hover {
+        color: black;
+        text-decoration:none;
+        }
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<!--[134] Creo el HTML de Productos-->
+
+<div class="container">
+    <h1>Agregue aquí los datos del producto</h1>
+    <br>
+    <!--CREAR FORMULARIO PARA LLENAR LOS DATOS DE LA USUARIO Y GUARDARLA EN EL OBJETO user-->
+    <form th:action="@{/GuardarProducto}" th:object="${prod}" method="post">
+        <!--CAMPO PARA NOMBRE DEL PRODUCTO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="nombre">Nombre del producto:</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{nombreProducto}" class="form-control" id="nombre"
+                           required="required">
+                </div>
+            </div>
+        </div>
+
+
+        <!--CAMPO PARA LISTA DE DETALLES PRODUCTOS-->
+        <!--[135] En este formulario debo de hacer llegar aquí, la lista que de detalles que se va a desplegar, para eso me regreso al controlador en su servicio agregar productos-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="listProdDet">Lista detalles de productos:</label>
+                <div class="col-md-6">
+                    <!--[139] Ya no es de tipo input sino select y dentro de él pongo las posibles opciones-->
+                    <select th:field="*{listaProductos}" class="form-control" id="listProdDet" required="required">
+                        <option th:each="productoDetalle : ${produDetalist}" th:text="${productoDetalle.marca}"
+                                th:value="${productoDetalle.id}"></option>
+                        <!--[140] Las opciones salen de la iteración produDetalist y eso lo hago con un each(aqui no hay for) cada producto que se encuentre en el objeto produDetalist muestreme en pantalla la marca pero el valor que va a guardar es el id -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA CANTIDAD-->
+        <!--[141] En este formulario debo de hacer llegar aquí, la cantidad de productos a agregar despues me regreso al controlador y crear el servicio agregar Inventario-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="cant">Cantidad:</label>
+                <div class="col-md-6">
+                    <input type="number" th:field="*{precio}" class="form-control" id="cant">
+                </div>
+            </div>
+        </div>
+
+
+        <!--CAMPO PARA PRECIO-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="precio">Precio unidad:</label>
+                <div class="col-md-6">
+                    <input type="number" th:field="*{precio}" class="form-control" id="precio">
+                </div>
+            </div>
+        </div>
+
+
+        <!--[74] Botones -->
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-success">Registrar producto</button> <!--[75] Botón Crear y [75.1]-->
+            </div>
+        </div>
+    </form>
+
+
+    <br>
+    <!--[76] Botón Atrás -->
+    <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a> <!--[77], [77.1] y [77.2]--->
+</div>
+
+</body>
+</html>

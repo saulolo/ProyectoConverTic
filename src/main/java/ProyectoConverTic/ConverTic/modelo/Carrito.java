@@ -15,7 +15,7 @@ import java.util.Date;
 public class Carrito {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_carrito", nullable = false)
     private int id;
     @Column(name = "fecha", nullable = false)
