@@ -26,6 +26,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -49,17 +75,70 @@
         </div>
 
 
-        <!--CAMPO PARA LISTA DE DETALLES PRODUCTOS-->
-        <!--[135] En este formulario debo de hacer llegar aquí, la lista que de detalles que se va a desplegar, para eso me regreso al controlador en su servicio agregar productos-->
+        <!--CAMPO PARA LISTA DE GÉNEROS-->
+        <!--[135] En este formulario debo de hacer llegar aquí, la lista que de géneros que se va a desplegar, para eso me regreso al controlador en su SERVICIO AGREGAR PRODUCTOS y agrego las lineas [136] y [137]-->
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="listGenero">Genero:</label>
                 <div class="col-md-6">
                     <!--[139] Ya no es de tipo input sino select y dentro de él pongo las posibles opciones-->
                     <select th:field="*{listaProductos}" class="form-control" id="listGenero" required="required">
-                        <option th:each="productoGenero : ${generoList}" th:text="${productoGenero.nombreGenero}"
-                                th:value="${productoGenero.id}"></option>
-                        <!--[140] Las opciones salen de la iteración produDetalist y eso lo hago con un each(aqui no hay for) cada producto que se encuentre en el objeto produDetalist muestreme en pantalla la marca pero el valor que va a guardar es el id -->
+                        <!--[139.1]NOTA: no entiendo bien este th:field="*{listaProductos}" de donde sale y porque lo debo de poner-->
+                        <option th:each="genero : ${generoList}" th:text="${genero.nombreGenero}"
+                                th:value="${genero.id}"></option>
+                        <!--[140] Las opciones salen de la iteración generoList y eso lo hago con un each(aqui no hay for) cada producto que se encuentre en el objeto generoList muestreme en pantalla la genero pero el valor que va a guardar(value) es el id -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA LISTA DE MARCAS-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="listMarca">Marca:</label>
+                <div class="col-md-6">
+                    <select th:field="*{listaProductos}" class="form-control" id="listMarca" required="required">
+                        <option th:each="marca : ${marcalist}" th:text="${marca.nombreMarca}"
+                                th:value="${marca.id}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA LISTA DE TALLAS-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="listTalla">Talla:</label>
+                <div class="col-md-6">
+                    <select th:field="*{listaProductos}" class="form-control" id="listTalla" required="required">
+                        <option th:each="talla : ${tallalist}" th:text="${talla.nombreTalla}"
+                                th:value="${talla.id}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA LISTA DE COLORES-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="listColor">Color:</label>
+                <div class="col-md-6">
+                    <select th:field="*{listaProductos}" class="form-control" id="listColor" required="required">
+                        <option th:each="color : ${colorlist}" th:text="${color.nombreColor}"
+                                th:value="${color.id}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--CAMPO PARA LISTA DE CATEGORÍAS-->
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="col-md-3" for="listCategoria">Categoría:</label>
+                <div class="col-md-6">
+                    <select th:field="*{listaProductos}" class="form-control" id="listCategoria" required="required">
+                        <option th:each="categoria : ${categorialist}" th:text="${categoria.nombreCategoria}"
+                                th:value="${categoria.id}"></option>
                     </select>
                 </div>
             </div>

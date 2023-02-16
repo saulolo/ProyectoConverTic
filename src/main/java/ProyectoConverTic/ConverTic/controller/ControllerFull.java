@@ -19,10 +19,31 @@ import java.util.Optional;
 
 public class ControllerFull {
 
+    @Autowired  //[47]
+    UsuarioService usuarioService; //[46]
+    @Autowired
+    ProductoDetalleService productoDetalleService;
+    @Autowired
+    ProductoService productoService;
+    @Autowired
+    InventarioService inventarioService;
+    @Autowired
+    GeneroService generoService;
+    @Autowired
+    MarcaService marcaService;
+    @Autowired
+    TallaService tallaService;
+    @Autowired
+    ColorService colorService;
+    @Autowired
+    CategoriaService categoriaService;
+
+
+
+
     /*--------------------------------------------------------------------------------------*/
     /* SERVICIOS DEL USUARIO */
-    @Autowired  //[47]
-            UsuarioService usuarioService; //[46]
+
 
     //SERVICIO VER USUARIO [48]
     @GetMapping({"/", "VerUsuarios"}) //[49]
@@ -96,8 +117,6 @@ public class ControllerFull {
     /*--------------------------------------------------------------------------------------*/
     /* SERVICIOS DE PRODUCTO DETALLE */  //[124]
 
-    @Autowired
-    ProductoDetalleService productoDetalleService;
 
     //SERVICIO VER PRODUCTO DETALLE
     @GetMapping("/productoDetalle")
@@ -115,8 +134,6 @@ public class ControllerFull {
     @GetMapping(path = "/productoDetalle{id}")
     public Optional<ProductoDetalle> productoDetallePorId(@PathVariable("id") Integer id) {
         return this.productoDetalleService.getProductoDetalleById(id);
-
-
     }
 
     //ACTUALIZAR EL JSON PRODUCTO DETALLE POR SUS ATRIBUTOS (No se si necesito este service aqui, porque la actualización no se hace desde esta clase)
@@ -144,10 +161,6 @@ public class ControllerFull {
     /*--------------------------------------------------------------------------------------*/
     /* SERVICIOS DE PRODUCTO  */  //[131]
 
-    @Autowired
-    ProductoService productoService;
-    @Autowired
-    GeneroService generoService;
 
     //SERVICIO VER PRODUCTOS
     @GetMapping({"/VerProductos"})
@@ -157,7 +170,6 @@ public class ControllerFull {
         model.addAttribute("mensaje", mensaje);
         return "verProductos";
         //[132] Creo el html de verProductos en templates (para tener el mismo archivo de verUsuarios, le doy click derecho en verUsuarios - Refactor - coyfile y lo nombro verProductos)
-
     }
 
     //SERVICIO AGREGAR PRODUCTOS
@@ -166,10 +178,16 @@ public class ControllerFull {
         Producto prod = new Producto(); //[138] Cuando ejecute este controlador y el controlador me lleve hasta su html, este va a llegar con:
         model.addAttribute("prod", prod); //[138.1] va a llegar con un objeto producto que es que esta en el front donde le meto valores a travez del tempate creado
         model.addAttribute("mensaje", mensaje); //[138.2] va a llegar con un posible mensaje que es el que utilizo para generar las ventanas emergentes y va a llegar con [138.3] una lista de detalles de productos, como se lo construí en la línea siguiente
-        List<Genero> listaGenero = generoService.getAllGenero();
-        model.addAttribute("generoList", listaGenero);
-        //List<ProductoDetalle> listaProductoDetalle = productoDetalleService.getAllProductoDetalle(); //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
-        //model.addAttribute("produDetalist", listaProductoDetalle);  //[137] Luego lo agrego al modelo como atributo, el cual le pongo como nombre produDetalist que se alimenta de la lista creada en la liena anterior
+        List<Genero> listaGenero = generoService.getAllGenero();  //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
+        model.addAttribute("generoList", listaGenero); //[137] Luego lo agrego al modelo como atributo, el cual le pongo como nombre produDetalist que se alimenta de la lista creada en la liena anterior
+        List<Marca> listaMarca = marcaService.getAllMarca();
+        model.addAttribute("marcalist", listaMarca);
+        List<Talla> listaTalla = tallaService.getAllTalla();
+        model.addAttribute("tallalist", listaTalla);
+        List<Color> listaColor = colorService.getAllColor();
+        model.addAttribute("colorlist", listaColor);
+        List<Categoria> listaCategoria = categoriaService.getAllCategoria();
+        model.addAttribute("categorialist", listaCategoria);
         return "agregarProducto";
         //[133] Creo el html de agregarProducto en templates (para tener el mismo archivo de agregarUsuario, le doy click derecho en agregarUsuario - Refactor - coyfile y lo nombro agregarProducto)
     }
@@ -177,8 +195,6 @@ public class ControllerFull {
 
     /*--------------------------------------------------------------------------------------*/
     /* SERVICIOS DEL INVENTARIO */
-    @Autowired
-    InventarioService inventarioService;
 
 
     //SERVICIO AGREGAR INVENTARIO [142]
