@@ -19,7 +19,15 @@ public class Inventario {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
+    @OneToOne
+    @JoinColumn(name = "id_productoDetalle")
+    private ProductoDetalle productoDetalle;
 
+
+    public Inventario(int cantidad, ProductoDetalle productoDetalle) {
+        this.cantidad = cantidad;
+        this.productoDetalle = productoDetalle;
+    }
 }
 
 

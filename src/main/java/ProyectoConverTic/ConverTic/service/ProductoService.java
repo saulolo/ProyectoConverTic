@@ -30,12 +30,9 @@ public class ProductoService {
 
 
     //MÉTODO PARA GUARDAR O ACTUALIZAR OBJETOS DE TIPO PRODUCTOS
-    public boolean saveOrUpdateProducto(Producto prod) {
+    public int saveOrUpdateProducto(Producto prod) {
         Producto produc = productoRepository.save(prod);
-        if (productoRepository.findById(produc.getId()) != null) {
-            return true;
-        }
-        return false;
+        return produc.getId();
     }
 
 

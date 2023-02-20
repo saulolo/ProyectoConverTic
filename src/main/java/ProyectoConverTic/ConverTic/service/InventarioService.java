@@ -23,12 +23,11 @@ public class InventarioService {
 
     //MÉTODO PARA GUARDAR LOS INVENTARIOS
     public boolean saveOrUpdateInvetario(Inventario inventario) {
-        Inventario user = inventarioRepository.save(inventario);
+        Inventario user = inventarioRepository.save(inventario); //Guarde de manera recursiva
         if (inventarioRepository.findById(user.getId()) != null) {
             return true;
         }
         return false;
     }
-
 
 }

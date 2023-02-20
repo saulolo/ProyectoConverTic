@@ -175,7 +175,7 @@ public class ControllerFull {
     //SERVICIO AGREGAR PRODUCTOS
     @GetMapping("/AgregarProducto")
     public String nuevoProducto(Model model, @ModelAttribute("mensaje") String mensaje) {
-        Producto prod = new Producto(); //[138] Cuando ejecute este controlador y el controlador me lleve hasta su html, este va a llegar con:
+        ProductoDTO prod = new ProductoDTO(); //[138] Cuando ejecute este controlador y el controlador me lleve hasta su html, este va a llegar con:
         model.addAttribute("prod", prod); //[138.1] va a llegar con un objeto producto que es que esta en el front donde le meto valores a travez del tempate creado
         model.addAttribute("mensaje", mensaje); //[138.2] va a llegar con un posible mensaje que es el que utilizo para generar las ventanas emergentes y va a llegar con [138.3] una lista de detalles de productos, como se lo construí en la línea siguiente
         List<Genero> listaGenero = generoService.getAllGenero();  //[136] Hay otro atributo que necesito que mande para el html, una lista que va a ser de producto detalle que es la que voy a utilizar para generar un select en el template creado
@@ -194,8 +194,29 @@ public class ControllerFull {
 
     //SERVICIO GUARDAR PRODUCTOS [141] Creo el servicio para el botón Guardar productos
     @PostMapping("/GuardarProducto")
-    public String guardarProducto(Producto prod, RedirectAttributes redirectAttributes) {
-        if (productoService.saveOrUpdateProducto(prod) == true) {
+    public String guardarProducto(ProductoDTO prodDTO, RedirectAttributes redirectAttributes) {
+        Producto prod = new Producto(prodDTO.getNombreProducto(), prodDTO.getPrecio());
+        Genero gen = new Genero();
+        gen.setId(prodDTO.getIdGenero());
+        Marca mar = new Marca();
+        mar.setId(prodDTO.getIdMarca());
+        Talla tall = new Talla();
+        tall.setId(prodDTO.getIdTalla());
+        Color col = new Color();
+        col.setId(prodDTO.getIdColor());
+        Categoria cat = new Categoria();
+        cat.setId(prodDTO.getIdCategoria());
+
+        prod.setId(productoService.saveOrUpdateProducto(prod));
+
+
+        ProductoDetalle prodDeta = new ProductoDetalle(prod, gen, mar, tall, col, cat);
+        prodDeta = productoDetalleService.saveOrUpdateProductoDetalle(prodDeta);
+        Inventario prodInv = new Inventario(prodDTO.getCantidad(), prodDeta);
+        boolean inventarioCreado = inventarioService.saveOrUpdateInvetario(prodInv);
+
+        System.out.println(prod);
+        if (inventarioCreado) {
             redirectAttributes.addFlashAttribute("mensaje", "saveOK");
             return "redirect:/VerProductos";
         }

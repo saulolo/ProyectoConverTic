@@ -19,39 +19,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -63,6 +30,7 @@
     <br>
     <!--CREAR FORMULARIO PARA LLENAR LOS DATOS DE LA USUARIO Y GUARDARLA EN EL OBJETO user-->
     <form th:action="@{/GuardarProducto}" th:object="${prod}" method="post">
+
         <!--CAMPO PARA NOMBRE DEL PRODUCTO-->
         <div class="row">
             <div class="form-group col-md-12">
@@ -82,7 +50,7 @@
                 <label class="col-md-3" for="listGenero">Genero:</label>
                 <div class="col-md-6">
                     <!--[139] Ya no es de tipo input sino select y dentro de él pongo las posibles opciones-->
-                    <select th:field="*{listaProductos}" class="form-control" id="listGenero" required="required">
+                    <select th:field="*{idGenero}" class="form-control" id="listGenero" required="required">
                         <!--[139.1]NOTA: no entiendo bien este th:field="*{listaProductos}" de donde sale y porque lo debo de poner-->
                         <option th:each="genero : ${generoList}" th:text="${genero.nombreGenero}"
                                 th:value="${genero.id}"></option>
@@ -97,7 +65,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="listMarca">Marca:</label>
                 <div class="col-md-6">
-                    <select th:field="*{listaProductos}" class="form-control" id="listMarca" required="required">
+                    <select th:field="*{idMarca}" class="form-control" id="listMarca" required="required">
                         <option th:each="marca : ${marcalist}" th:text="${marca.nombreMarca}"
                                 th:value="${marca.id}"></option>
                     </select>
@@ -110,7 +78,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="listTalla">Talla:</label>
                 <div class="col-md-6">
-                    <select th:field="*{listaProductos}" class="form-control" id="listTalla" required="required">
+                    <select th:field="*{idTalla}" class="form-control" id="listTalla" required="required">
                         <option th:each="talla : ${tallalist}" th:text="${talla.nombreTalla}"
                                 th:value="${talla.id}"></option>
                     </select>
@@ -123,7 +91,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="listColor">Color:</label>
                 <div class="col-md-6">
-                    <select th:field="*{listaProductos}" class="form-control" id="listColor" required="required">
+                    <select th:field="*{idColor}" class="form-control" id="listColor" required="required">
                         <option th:each="color : ${colorlist}" th:text="${color.nombreColor}"
                                 th:value="${color.id}"></option>
                     </select>
@@ -136,7 +104,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="listCategoria">Categoría:</label>
                 <div class="col-md-6">
-                    <select th:field="*{listaProductos}" class="form-control" id="listCategoria" required="required">
+                    <select th:field="*{idCategoria}" class="form-control" id="listCategoria" required="required">
                         <option th:each="categoria : ${categorialist}" th:text="${categoria.nombreCategoria}"
                                 th:value="${categoria.id}"></option>
                     </select>
@@ -150,7 +118,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3" for="cant">Cantidad:</label>
                 <div class="col-md-6">
-                    <input type="number" th:field="*{precio}" class="form-control" id="cant">
+                    <input type="number" th:field="*{cantidad}" class="form-control" id="cant">
                 </div>
             </div>
         </div>

@@ -26,6 +26,10 @@ public class Producto {
     @Column(name = "precio", nullable = false)
     private double precio;
 
+    public Producto(String nombreProducto, double precio) {
+        this.nombreProducto = nombreProducto;
+        this.precio = precio;
+    }
 
     //[20] Creo constructores (los creé con las anotaciones de lombok).
 
