@@ -19,7 +19,7 @@ public class Inventario {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_productoDetalle")
     private ProductoDetalle productoDetalle;
 

@@ -195,6 +195,8 @@ public class ControllerFull {
     //SERVICIO GUARDAR PRODUCTOS [141] Creo el servicio para el botón Guardar productos
     @PostMapping("/GuardarProducto")
     public String guardarProducto(ProductoDTO prodDTO, RedirectAttributes redirectAttributes) {
+        System.out.println("Buscando error aqui 1 ==> ");
+
         Producto prod = new Producto(prodDTO.getNombreProducto(), prodDTO.getPrecio());
         Genero gen = new Genero();
         gen.setId(prodDTO.getIdGenero());
@@ -207,13 +209,25 @@ public class ControllerFull {
         Categoria cat = new Categoria();
         cat.setId(prodDTO.getIdCategoria());
 
-        prod.setId(productoService.saveOrUpdateProducto(prod));
 
+        int idProducto = productoService.saveOrUpdateProducto(prod);
+        System.out.println("Buscando error 2 ==>" + idProducto);
+
+        prod.setId(idProducto);
 
         ProductoDetalle prodDeta = new ProductoDetalle(prod, gen, mar, tall, col, cat);
+        System.out.println("prodDeta 3 ==> " + prodDeta);
+
+
         prodDeta = productoDetalleService.saveOrUpdateProductoDetalle(prodDeta);
+        //prodDeta.setId(11);
+        System.out.println("prodDeta 4 ==> " + prodDeta);
+
         Inventario prodInv = new Inventario(prodDTO.getCantidad(), prodDeta);
+        System.out.println("prodInv 5 ==> " + prodInv);
         boolean inventarioCreado = inventarioService.saveOrUpdateInvetario(prodInv);
+
+        System.out.println("inventarioCreado 4 ==> " + inventarioCreado);
 
         System.out.println(prod);
         if (inventarioCreado) {

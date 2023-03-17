@@ -20,6 +20,7 @@
         text-decoration:none;
         }
 
+
     </style>
 </head>
 <body>
@@ -47,7 +48,7 @@
         <tr th:each="producto : ${prodlist}">  <!--[58.2]-->
             <td th:text="${producto.id}"></td>  <!--[58.3] y [58.4]-->
             <td th:text="${producto.nombreProducto}"></td>
-            <td th:text="${producto.listaProductos}"></td> <!--[134] Tengo dudad de como genero esta lista-->
+            <td th:text="${producto.genero}"></td> <!--[134] Tengo dudad de como genero esta lista-->
             <td th:text="${producto.precio}"></td>
             <td>
                 <!--[58.5] Creo los botones-->
@@ -97,6 +98,7 @@
 
         //[116] Me voy para la Interface ProductoDetalleRepository.
     }
+
 
 
 
